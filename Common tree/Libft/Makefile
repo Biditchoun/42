@@ -6,7 +6,7 @@
 #    By: swijnber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/15 11:15:02 by swijnber          #+#    #+#              #
-#    Updated: 2022/04/15 15:28:17 by swijnber         ###   ########.fr        #
+#    Updated: 2022/04/15 16:10:36 by swijnber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,16 @@ CFLAGS	=	-Wall -Werror -Wextra
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
-			${CC} -o ${NAME} ${OBJS}
 			ar -rcs $@ $^
 
 all:		${NAME}
+
+clean:	
+			rm -f ${OBJS}
+
+fclean:		clean
+			rm -f ${NAME}
+
+re:			fclean all
+
+.PHONY:		all clean fclean re
