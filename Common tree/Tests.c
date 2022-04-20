@@ -6,14 +6,15 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 22:59:50 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/15 14:43:55 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/04/20 18:08:24 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //To use this testing program, you will need a libft.h ready.
-//Other than that, just run the "gcc -Wall -Werror -Wextra *.c" command in the right folder and you should be good to go.
+//Other than that, just run the "gcc -Wall -Werror -Wextra Tests.c libft.a && ./a.out" command in the right folder and you should be good to go.
+//If you do not have a makefile yet, replace "Tests.c libft.a" with "*.c", or anything else you see fit.
 //Do not hesitate to mute some parts of the code if you are missing some functions but want to test your already existing ones, as this
-//program will not compile if there isn't every function of libft otherwise.
+//program will not compile if there isn't every function of libft.
 
 #include "libft.h"
 #include <stdio.h>
@@ -21,11 +22,11 @@
 #include <string.h>
 #include <strings.h>
 
-static void	ft_free(char **split, int s)
+static void	ft_free(char **split)
 {
-	int	i = -1;
-	while (++i < s)
-		free(split[i]);
+	int	i = 0;
+	while (split[i])
+		free(split[i++]);
 	free(split);
 }
 
@@ -39,20 +40,26 @@ static char	mapi(unsigned int i, char s)
 
 static char	mapi2(unsigned int i, char s)
 {
-	if (i > 5)
+	if (i < 5)
 		return (ft_tolower(s));
 	else
-		return (ft_tolower(s));
+		return (ft_toupper(s));
 }
 
 static void	iteri(unsigned int i, char *s)
 {
-	ft_tolower(s[i]);
+	if (i < 8)
+		*s = ft_tolower(*s);
+	else
+		*s = ft_toupper(*s);
 }
 
 static void	iteri2(unsigned int i, char *s)
 {
-	ft_toupper(s[i]);
+	if (i < 5)
+		*s = ft_toupper(*s);
+	else
+		*s = ft_tolower(*s);
 }
 
 int	main()
@@ -394,6 +401,16 @@ int	main()
 	}
 	memset(b0, 0, 100);
 	memset(b1, 0, 100);
+	strlcpy (b0, s4, 25);
+	strlcpy (b1, s4, 25);
+	if (memcmp(memmove("aaa", "aaa", 11), ft_memmove("aaa", "aaa", 11), 12))
+	{
+		printf (" KO\nParams : s4, src = dest\nmemmove = %s\n", b0);
+		printf ("ft_memmove = %s\n", b1);
+		return (1);
+	}
+	memset(b0, 0, 100);
+	memset(b1, 0, 100);
 	//strlcpy
 	printf (" OK !\nft_strlcpy :");
 	if (strlcpy(b0, s2, 13) != ft_strlcpy(b1, s2, 13) || strcmp(b0, b1))
@@ -581,6 +598,11 @@ int	main()
 		printf (" KO\nParams : s0, '8'\nstrchr = NULL\nft_strchr = %s\n", ft_strchr(s0, '8'));
 		return (1);
 	}
+	if (strcmp(strchr(s2, '3' + 256), ft_strchr(s2, '3' + 256)))
+	{
+		printf("KO\nParams : s2, '3' + 256, 3\nstrchr = %s\nft_strchr = %s\n", strchr(s2, '3' + 256), ft_strchr(s2, '3' + 256));
+		return (1);
+	}
 	//strrchr
 	printf (" OK !\nft_strrchr :");
 	if (strcmp(strrchr(s4, 'e'), ft_strrchr(s4, 'e')))
@@ -611,6 +633,21 @@ int	main()
 	if (ft_strrchr(s0, '8'))
 	{
 		printf (" KO\nParams : s0, '8'\nstrrchr = NULL\nft_strrchr = %s\n", ft_strrchr(s0, '8'));
+		return (1);
+	}
+	if (strcmp(strrchr(s2, '3' + 256), ft_strrchr(s2, '3' + 256)))
+	{
+		printf("KO\nParams : s2, '3' + 256\nstrrchr = %s\nft_strrchr = %s\n", strrchr(s2, '3' + 256), ft_strrchr(s2, '3' + 256));
+		return (1);
+	}
+	if (ft_strrchr(s4, 'Z'))
+	{
+		printf("KO\nParams : s4, 'Z'\nstrrchr = NULL\nft_strrchr = %s\n", ft_strrchr(s4, 'Z'));
+		return (1);
+	}
+	if (ft_strrchr(&s4[1], 'J'))
+	{
+		printf("KO\nParams : &s4[1], 'J'\nstrrchr = NULL\nft_strrchr = %s\n", ft_strrchr(&s4[1], 'J'));
 		return (1);
 	}
 	//strncmp
@@ -692,17 +729,17 @@ int	main()
 	bzero (b0, 2);
 	//memchr
 	printf (" OK !\nft_memchr :");
-	if (strcmp(memchr(s4, 'J', 30), ft_memchr(s4, 'J', 30)))
+	if (memcmp(memchr(s4, 'J', 30), ft_memchr(s4, 'J', 30), 30))
 	{
 		printf (" KO\nParams : s4, 'J', 30\nmemchr = %s\nft_memchr = %s\n", memchr(s4, 'J', 30), ft_memchr(s4, 'J', 30));
 		return (1);
 	}
-	if (strcmp(memchr(s4, 'o', 30), ft_memchr(s4, 'o', 30)))
+	if (memcmp(memchr(s4, 'o', 30), ft_memchr(s4, 'o', 30), 30))
 	{
 		printf (" KO\nParams : s4, 'o', 30\nmemchr = %s\nft_memchr = %s\n", memchr(s4, 'o', 30), ft_memchr(s4, 'o', 30));
 		return (1);
 	}
-	if (strcmp(memchr(s3, 0, 30), ft_memchr(s3, 0, 30)))
+	if (memcmp(memchr(s3, 0, 30), ft_memchr(s3, 0, 30), 30))
 	{
 		printf (" KO\nParams : s3, 0, 30\nmemchr = %s\nft_memchr = %s\n", memchr(s3, 0, 30), ft_memchr(s3, 0, 30));
 		return (1);
@@ -712,7 +749,7 @@ int	main()
 		printf (" KO\nParams : s2, 'u', 13\nmemchr = NULL\nft_memchr = %s\n", ft_memchr(s2, 'u', 13));
 		return (1);
 	}
-	if (strcmp(memchr(s1, '1', 2), ft_memchr(s1, '1', 2)))
+	if (memcmp(memchr(s1, '1', 2), ft_memchr(s1, '1', 2), 2))
 	{
 		printf (" KO\nParams : s1, '1', 2\nmemchr = %s\nft_memchr = %s\n", memchr(s1, '1', 2), ft_memchr(s1, '1', 2));
 		return (1);
@@ -727,9 +764,14 @@ int	main()
 		printf (" KO\nParams : s2, '3', 2\nmemchr = NULL\nft_memchr = %s\n", ft_memchr(s2, '3', 2));
 		return (1);
 	}
-	if (strcmp(memchr(s2, '3', 3), ft_memchr(s2, '3', 3)))
+	if (memcmp(memchr(s2, '3', 3), ft_memchr(s2, '3', 3), 3))
 	{
 		printf (" KO\nParams : s2, '3', 3\nmemchr = %s\nft_memchr = %s\n", memchr(s2, '3', 3), ft_memchr(s2, '3', 3));
+		return (1);
+	}
+	if (memcmp(memchr(s2, '3' + 256, 3), ft_memchr(s2, '3' + 256, 3), 3))
+	{
+		printf("KO\nParams : s2, '3' + 256, 3\nmemchr = %s\nft_memchr = %s\n", memchr(s2, '3' + 256, 3), ft_memchr(s2, '3' + 256, 3));
 		return (1);
 	}
 	//memcmp
@@ -892,19 +934,139 @@ int	main()
 		return (1);
 	}
 	bzero(b0, 30);
-	strlcpy(b0, " a  8542", 30);
+	strlcpy(b0, " -1", 30);
 	if (atoi(b0) != ft_atoi(b0))
 	{
 		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
 		return (1);
 	}
 	bzero(b0, 30);
-	strlcpy(b0, " \b-0 42", 30);
+	strlcpy(b0, " -0", 30);
 	if (atoi(b0) != ft_atoi(b0))
 	{
-		printf (" KO\nTest : \" \\b-0 42\"\natoi = %i, ft_atoi = %i\n", atoi(b0), ft_atoi(b0));
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
 		return (1);
 	}
+	bzero(b0, 30);
+	strlcpy(b0, " +1", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " a  9223372036854775807", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " 19489384723948723948", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " -19489384723948723948", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " 9223372036854775809", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " -9223372036854775809", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " 9223372036854775808", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " -9223372036854775808", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " 9223372036854775807", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " -9223372036854775807", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " 9223372036854775806", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " -9223372036854775806", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " 1313131313131313", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " -1313131313131313", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " -2147483649", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " 2147483648", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
+	strlcpy(b0, " -2147483648", 30);
+	if (atoi(b0) != ft_atoi(b0))
+	{
+		printf (" KO\nTest : \"%s\"\natoi = %i, ft_atoi = %i\n", b0, atoi(b0), ft_atoi(b0));
+		return (1);
+	}
+	bzero(b0, 30);
 	//calloc
 	printf (" OK !\nft_calloc :");
 	m1 = calloc(5, sizeof (char));
@@ -944,10 +1106,10 @@ int	main()
 	free(m1);
 	free(m2);
 	//Here is the search about the mysteries of calloc's maximum allocation capacity. I did not find out what it is. Some say it is the number
-	//entered in ft_calloc, but calloc still works with it. It even works ten billion.
+	//entered in ft_calloc, but calloc still works with it. It even works with ten billion.
 	//Maybe calloc only allocates up to 2GB and allocates 2GB if it's asked to do more than that ? In that case, why did I not find it out with
 	//memcmp, maybe size_t reached its limit ? Or maybe I transformed all the free memory on this pc into '/0' ?
-	//I have no idea. Conclusion, you can fiddle around a bit if you want, I wasn't able to find out what is happeing (and am not testing it).
+	//I have no idea. Conclusion, you can fiddle around a bit if you want, I wasn't able to find out what is happening (and am not testing it).
 	//Edit : https://vorpus.org/blog/why-does-calloc-exist/
 	/*m1 = calloc(10000000000, 1);
 	m2 = ft_calloc(2147483424, 1);
@@ -1008,7 +1170,7 @@ int	main()
 	//substr
 	//I decided not to test anything that is not specified by the subject (e.g. start > strlen(string))
 	printf (" OK ?*\nFrom here on, every function is tested however I understand they should behave.\nft_substr :");
-	m1 = strdup("Jambonfromage");
+	m1 = strdup("Jambonfromageq");
 	m2 = ft_substr(s4, 0, 14);
 	if (strcmp(m1, m2))
 	{
@@ -1017,7 +1179,7 @@ int	main()
 	}
 	free(m1);
 	free(m2);
-	m1 = strdup("fromagequiroule");
+	m1 = strdup("fromagequiroulem");
 	m2 = ft_substr(s4, 6, 16);
 	if (strcmp(m1, m2))
 	{
@@ -1027,7 +1189,7 @@ int	main()
 	free(m1);
 	free(m2);
 	m1 = strdup("fromagequiroulemal");
-	m2 = ft_substr(s4, 6, 21);
+	m2 = ft_substr(s4, 6, 100);
 	if (strcmp(m1, m2))
 	{
 		printf (" KO\nParams : s4, 6, 21\nexpected : \"%s\"\nft_substr : \"%s\"", m1, m2);
@@ -1058,6 +1220,15 @@ int	main()
 	if (strcmp(m1, m2))
 	{
 		printf (" KO\nParams : s4, 6, 0\nexpected : \"%s\"\nft_substr : \"%s\"", m1, m2);
+		return (1);
+	}
+	free(m1);
+	free(m2);
+	m1 = strdup("a");
+	m2 = ft_substr(s4, 1, 1);
+	if (memcmp(m1, m2, 2))
+	{
+		printf (" KO\nParams : s4, 100, 1\nexpected : \"%s\"\nft_substr : \"%s\"", m1, m2);
 		return (1);
 	}
 	free(m1);
@@ -1194,7 +1365,7 @@ int	main()
 	//split
 	printf (" OK ?*\nft_split :");
 	//test 1
-	split1 = malloc(sizeof (char *));
+	split1 = malloc(2 * sizeof (char *));
 	if (!split1)
 	{
 		printf(" ??\nA malloc failed during testing.\n");
@@ -1204,25 +1375,26 @@ int	main()
 	if (!split1[0])
 	{
 		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 0);
+		ft_free(split1);
 		return (1);
 	}
+	split1[1] = NULL;
 	split2 = ft_split(s4, ' ');
 	if (!split2)
 	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 1);
+		printf(" ??\nA malloc failed during testing (or ft_split does not return anything).\n");
+		ft_free(split1);
 		return (1);
 	}
-	if (strcmp(split1[0], split2[0]))
+	if (strcmp(split1[0], split2[0]) || split2[1] != NULL)
 	{
 		printf (" KO\nParams : s4 splitted by ' '\nexpected : \n\"%s\"\n\nft_slip : \n\"%s\"\n", split1[0], split2[0]);
 		return (1);
 	}
-	ft_free(split1, 1);
-	ft_free(split2, 1);
+	ft_free(split1);
+	ft_free(split2);
 	//test 2
-	split1 = malloc(4 * sizeof (char *));
+	split1 = malloc(5 * sizeof (char *));
 	if (!split1)
 	{
 		printf(" ??\nA malloc failed during testing.\n");
@@ -1232,74 +1404,62 @@ int	main()
 	if (!split1[0])
 	{
 		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 0);
+		ft_free(split1);
 		return (1);
 	}
 	split1[1] = strdup("bonfro");
 	if (!split1[1])
 	{
 		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 1);
+		ft_free(split1);
 		return (1);
 	}
 	split1[2] = strdup("agequiroule");
 	if (!split1[2])
 	{
 		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 2);
+		ft_free(split1);
 		return (1);
 	}
 	split1[3] = strdup("al");
 	if (!split1[3])
 	{
 		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 3);
+		ft_free(split1);
 		return (1);
 	}
+	split1[4] = NULL;
 	split2 = ft_split(s4, 'm');
 	if (!split2)
 	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 4);
+		printf(" ??\nA malloc failed during testing (or ft_split does not return anything).\n");
+		ft_free(split1);
 		return (1);
 	}
-	if (strcmp(split1[0], split2[0]) || strcmp(split1[1], split2[1]) || strcmp(split1[2], split2[2]) || strcmp(split1[3], split2[3]))
+	if (strcmp(split1[0], split2[0]) || strcmp(split1[1], split2[1]) || strcmp(split1[2], split2[2]) || strcmp(split1[3], split2[3]) || split2[4] != NULL)
 	{
 		printf (" KO\nParams : s4 splitted by 'm'\nexpected : \n\"%s\"\n\"%s\"\n\"%s\"\n\"%s\"\n\nft_slip : \n\"%s\"\n\"%s\"\n\"%s\"\n\"%s\"\n", split1[0], split1[1], split1[2], split1[3], split2[0], split2[1], split2[2], split2[3]);
 		return (1);
 	}
-	ft_free(split1, 4);
-	ft_free(split2, 4);
+	ft_free(split1);
+	ft_free(split2);
 	//test 3
-	split1 = malloc(sizeof (char *));
-	if (!split1)
-	{
-		printf(" ??\nA malloc failed during testing.\n");
-		return (1);
-	}
-	split1[0] = strdup(s0);
-	if (!split1[0])
-	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 0);
-		return (1);
-	}
 	split2 = ft_split(s0, ' ');
 	if (!split2)
 	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 1);
+		printf(" ??\nA malloc failed during testing (or ft_split does not return anything).\n");
+		ft_free(split1);
 		return (1);
 	}
-	if (strcmp(split1[0], split2[0]))
+	if (split2[0] != NULL)
 	{
 		printf (" KO\nParams : s0 splitted by ' '\nexpected : \n\"%s\"\n\nft_strtrim : \n\"%s\"\n", split1[0], split2[0]);
 		return (1);
 	}
-	ft_free(split1, 1);
-	ft_free(split2, 1);
+	ft_free(split2);
+	printf("\noui\n");
 	//test 4
-	split1 = malloc(sizeof (char *));
+	split1 = malloc(2 * sizeof (char *));
 	if (!split1)
 	{
 		printf(" ??\nA malloc failed during testing.\n");
@@ -1309,79 +1469,53 @@ int	main()
 	if (!split1[0])
 	{
 		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 0);
+		ft_free(split1);
 		return (1);
 	}
+	split1[1] = NULL;
 	split2 = ft_split(s4, 0);
 	if (!split2)
 	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 1);
+		printf(" ??\nA malloc failed during testing (or ft_split does not return anything).\n");
+		ft_free(split1);
 		return (1);
 	}
-	if (strcmp(split1[0], split2[0]))
+	if (strcmp(split1[0], split2[0]) || split2[1] != NULL)
 	{
 		printf (" KO\nParams : s4 splitted by '\\0'\nexpected : \n\"%s\"\n\nft_slip : \n\"%s\"\n", split1[0], split2[0]);
 		return (1);
 	}
-	ft_free(split1, 1);
-	ft_free(split2, 1);
+	ft_free(split1);
+	ft_free(split2);
 	//test 5
-	split1 = malloc(5 * sizeof (char *));
+	split1 = malloc(2 * sizeof (char *));
 	if (!split1)
 	{
 		printf(" ??\nA malloc failed during testing.\n");
 		return (1);
 	}
-	split1[0] = strdup(s0);
+	split1[0] = strdup("a");
 	if (!split1[0])
 	{
 		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 0);
+		ft_free(split1);
 		return (1);
 	}
-	split1[1] = strdup(s0);
-	if (!split1[1])
-	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 1);
-		return (1);
-	}
-	split1[2] = strdup("a");
-	if (!split1[2])
-	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 2);
-		return (1);
-	}
-	split1[3] = strdup(s0);
-	if (!split1[3])
-	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 3);
-		return (1);
-	}
-	split1[4] = strdup(s0);
-	if (!split1[4])
-	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 4);
-		return (1);
-	}
+	split1[1] = NULL;
 	split2 = ft_split("jjajj", 'j');
 	if (!split2)
 	{
-		printf(" ??\nA malloc failed during testing.\n");
-		ft_free(split1, 5);
+		printf(" ??\nA malloc failed during testing (or ft_split does not return anything).\n");
+		ft_free(split1);
 		return (1);
 	}
-	if (strcmp(split1[0], split2[0]) || strcmp(split1[1], split2[1]) || strcmp(split1[2], split2[2]) || strcmp(split1[3], split2[3]) || strcmp(split1[4], split2[4]))
+	if (strcmp(split1[0], split2[0]) || split2[1] != NULL)
 	{
-		printf (" KO\nParams : \"jjajj\" splitted by 'j'\nexpected : \n\"%s\"\n\"%s\"\n\"%s\"\n\"%s\"\n\"%s\"\n\nft_slip : \n\"%s\"\n\"%s\"\n\"%s\"\n\"%s\"\n\"%s\"\n", split1[0], split1[1], split1[2], split1[3], split1[4], split2[0], split2[1], split2[2], split2[3], split2[4]);
+		printf (" KO\nParams : \"jjajj\" splitted by 'j'\nexpected : \n\"%s\"\n\nft_slip : \n\"%s\"\n", split1[0], split2[0]);
 		return (1);
 	}
-	ft_free(split1, 5);
-	ft_free(split2, 5);
+	ft_free(split1);
+	ft_free(split2);
 	//itoa
 	printf (" OK ?*\nft_itoa :");
 	m1 = strdup("100111");
@@ -1453,35 +1587,55 @@ int	main()
 	m2 = ft_strmapi(s4, mapi);
 	if (strcmp(m1, m2))
 	{
-		printf (" KO\nexpected : \"%s\"\nft_substr : \"%s\"", m1, m2);
+		printf (" KO\nexpected : \"%s\"\nft_strmapi : \"%s\"", m1, m2);
 		return (1);
 	}
 	free(m1);
 	free(m2);
 	printf(" OK ?*\nft_strmapi :");
-	m1 = strdup("jambonFROMAGEQUIROULEMAL");
+	m1 = strdup("jamboNFROMAGEQUIROULEMAL");
 	m2 = ft_strmapi(s4, mapi2);
 	if (strcmp(m1, m2))
 	{
-		printf (" KO\nexpected : \"%s\"\nft_substr : \"%s\"", m1, m2);
+		printf (" KO\nexpected : \"%s\"\nft_strmapi : \"%s\"", m1, m2);
 		return (1);
 	}
 	free(m1);
 	free(m2);
 	//striteri
 	printf(" OK ?*\nft_striteri :");
+	m1 = strdup("jambonfrOMAGEQUIROULEMAL");
+	m2 = strdup(s4);
+	ft_striteri(m2, iteri);
+	if (strcmp(m1, m2))
+	{
+		printf (" KO\nexpected : \"%s\"\nft_striteri : \"%s\"", m1, m2);
+		return (1);
+	}
+	free(m1);
+	free(m2);
+	m1 = strdup("JAMBOnfromagequiroulemal");
+	m2 = strdup(s4);
+	ft_striteri(m2, iteri2);
+	if (strcmp(m1, m2))
+	{
+		printf (" KO\nexpected : \"%s\"\nft_striteri : \"%s\"", m1, m2);
+		return (1);
+	}
+	free(m1);
+	free(m2);
 	printf(" OK !\n");
 	//some tests on the functions using write
 	printf("ft_putchar_1 (0 ~): \n");
 	ft_putchar_fd('0', 1);
 	ft_putchar_fd(' ', 1);
 	ft_putchar_fd('~', 1);
-	printf("\nft_putstr_1 :\n");
+	printf("\nft_putstr_1 (s4s2s1s0) :\n");
 	ft_putstr_fd(s4, 1);
 	ft_putstr_fd(s2, 1);
 	ft_putstr_fd(s1, 1);
 	ft_putstr_fd(s0, 1);
-	printf("\nft_putendl_1 :\n");
+	printf("\nft_putendl_1 (s4s2s1s0) :\n");
 	ft_putendl_fd(s4, 1);
 	ft_putendl_fd(s2, 1);
 	ft_putendl_fd(s1, 1);

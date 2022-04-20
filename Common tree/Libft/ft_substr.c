@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 10:45:46 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/13 14:37:14 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/04/20 15:59:19 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*ft_strndup(char const *s, int size)
 		return (NULL);
 	l = ft_strlen(s) + 1;
 	if (size < l)
-		l = size;
+		l = size + 1;
 	c = malloc(l * sizeof (const char));
 	if (!c)
 		return (NULL);
@@ -35,6 +35,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
+	if (start > ft_strlen(s) - 1)
+		return (ft_strdup(""));
 	c = ft_strndup(&s[start], len);
 	return (c);
 }

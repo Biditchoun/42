@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 02:41:20 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/08 08:27:37 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/04/20 18:07:24 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	if (s < d)
 		while (n--)
 			d[n] = s[n];
-	else
+	else if (d < s)
 		while (++i < n)
 			d[i] = s[i];
 	return (dest);

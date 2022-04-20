@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:48:18 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/14 11:34:08 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:01:16 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ char	*ft_strtrim(const char *s1, const char *set)
 	if (!s1[s])
 		rt = ft_calloc(1, sizeof (char));
 	else
-		rt = ft_substr(s1, s, e - s + 2);
+		rt = ft_substr(s1, s, e - s + 1);
 	return (rt);
 }
