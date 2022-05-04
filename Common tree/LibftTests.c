@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 22:59:50 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/04 15:45:39 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:15:55 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -675,7 +675,7 @@ int	main()
 		return (1);
 	}
 	b0[13] = 2;
-	if (strncmp (b0, b1, 14) != ft_strncmp(b0, b1, 14))
+	if (strncmp (b0, b1, 14) != ft_strncmp(b0, b1, 14) && ft_strncmp(b0, b1, 14) != -1)
 	{
 		printf (" KO\nParams : s4[13]=2, s4, 14\nstrncmp = %i, ft_strncmp = %i\n", strncmp(b0, b1, 14), ft_strncmp(b0, b1, 14));
 		return (1);
@@ -691,7 +691,7 @@ int	main()
 		return (1);
 	}
 	b1[7] = 3;
-	if (strncmp (b0, b1, 8) != ft_strncmp(b0, b1, 8))
+	if (strncmp (b0, b1, 8) != ft_strncmp(b0, b1, 8) && ft_strncmp(b0, b1, 8) != 1)
 	{
 		printf (" KO\nParams : s4, s4[7]=3, 8\nstrncmp = %i, ft_strncmp = %i\n", strncmp(b0, b1, 8), ft_strncmp(b0, b1, 8));
 		return (1);
@@ -714,14 +714,14 @@ int	main()
 		return (1);
 	}
 	b1[0] = '\200';
-	if (strncmp (b0, b1, 13) != ft_strncmp(b0, b1, 13))
+	if (strncmp (b0, b1, 13) != ft_strncmp(b0, b1, 13) && ft_strncmp(b0, b1, 13) != -1)
 	{
 		printf (" KO\nParams : s0, s0[0] = '\\200', 13\nstrncmp = %i, ft_strncmp = %i\n", strncmp(b0, b1, 13), ft_strncmp(b0, b1, 13));
 		return (1);
 	}
 	b0[0] = '\200';
 	bzero (b1, 2);
-	if (strncmp (b0, b1, 13) != ft_strncmp(b0, b1, 13))
+	if (strncmp (b0, b1, 13) != ft_strncmp(b0, b1, 13) && ft_strncmp(b0, b1, 13) != 1)
 	{
 		printf (" KO\nParams : s0[0] = '\\200', s0, 13\nstrncmp = %i, ft_strncmp = %i\n", strncmp(b0, b1, 13), ft_strncmp(b0, b1, 13));
 		return (1);
