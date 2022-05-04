@@ -6,4 +6,4 @@ Some perks of using this one :
 
 Limitations :
 - Idk how to use file descriptors nor how to check the size of a malloc.
-- If a test provokes a bus error or a segfault, you will have to search for it by yourself by fiddling with the tester (and no, ft_memmove should not bus error when src and dst point to the same place).
+- If a test provokes a bus error or a segfault, you will have to search for it by yourself by fiddling with the tester.

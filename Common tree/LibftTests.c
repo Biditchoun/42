@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 22:59:50 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/20 18:08:24 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:45:39 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -403,7 +403,7 @@ int	main()
 	memset(b1, 0, 100);
 	strlcpy (b0, s4, 25);
 	strlcpy (b1, s4, 25);
-	if (memcmp(memmove("aaa", "aaa", 11), ft_memmove("aaa", "aaa", 11), 12))
+	if (memcmp(memmove(b0, b0, 11), ft_memmove(b1, b1, 11), 12))
 	{
 		printf (" KO\nParams : s4, src = dest\nmemmove = %s\n", b0);
 		printf ("ft_memmove = %s\n", b1);
