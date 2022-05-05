@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 19:06:04 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/13 13:46:20 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:34:14 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
-	if (!s)
-		return (0);
 	i = 0;
 	while (s[i])
 		i++;

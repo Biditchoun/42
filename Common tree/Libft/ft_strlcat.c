@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 09:38:09 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/13 15:58:10 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:48:36 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	unsigned int	ds;
 
 	ds = ft_strlen(dst);
-	if (ds > size || !dst || !src)
+	if (ds > size)
 		return (ft_strlen(src) + size);
 	j = 0;
 	i = ds;

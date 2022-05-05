@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 04:29:02 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/15 10:58:31 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:43:54 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 
-	if (!src || !dst || !size)
+	if (!size)
 		return (ft_strlen(src));
 	i = -1;
 	while (++i < size && src[i])

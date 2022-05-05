@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 01:00:00 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/09 06:49:59 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/05 17:50:43 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	unsigned int	i;
 
 	i = 0;
-	if (!s1 || !s2 || !n)
+	if (!n)
 		return (0);
 	while (s1 && s2 && i < n - 1)
 	{

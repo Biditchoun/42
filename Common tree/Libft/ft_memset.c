@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:39:36 by swijnber          #+#    #+#             */
-/*   Updated: 2022/04/08 08:29:49 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:14:56 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	*ft_memset(void *s, int c, size_t n)
 	size_t	i;
 	char	*a;
 
-	if (!s)
-		return (s);
 	a = (char *)s;
 	i = 0;
 	while (i < n)
