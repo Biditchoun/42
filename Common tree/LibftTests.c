@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 22:59:50 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/06 14:19:22 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:39:46 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -737,10 +737,10 @@ int	main()
 	bzero (b0, 10);
 	bzero (b1, 10);
 	strcpy(b0, "\x12\xfe\x65\x12\xbd\xde\xad");
-	strcpy(b1, "\x12\xfe\x65\x12\xfd");
-	if (strncmp (b0, b1, 13) == ft_strncmp(b0, b1, 13) && ft_strncmp(b0, b1, 13) != -1)
+	strcpy(b1, "\x12\x04");
+	if (strncmp (b0, b1, 13) != ft_strncmp(b0, b1, 13) && ft_strncmp(b0, b1, 13) != 1)
 	{
-		printf (" KO\nParams : \"\\x12\\xfe\\x65\\x12\\xbd\\xde\\xad\", \"\\x12\\xfe\\x65\\x12\\xfd\", 13\nstrncmp = %i, ft_strncmp = %i\n", strncmp(b0, b1, 13), ft_strncmp(b0, b1, 13));
+		printf (" KO\nParams : \"\\x12\\xfe\\x65\\x12\\xbd\\xde\\xad\", \"\\x12\\x04\", 13\nstrncmp = %i, ft_strncmp = %i\n", strncmp(b0, b1, 13), ft_strncmp(b0, b1, 13));
 		return (1);
 	}
 	bzero (b0, 10);

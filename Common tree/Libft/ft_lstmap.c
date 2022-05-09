@@ -6,18 +6,38 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:59:24 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/05 17:39:03 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:16:16 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void	delclear(t_list **lst, void (*del)(void *))
+{
+	void	*ptdr;
+
+	if (del)
+		ft_lstclear(lst, del);
+	else
+	{
+		while (lst && *lst)
+		{
+			ptdr = (*lst)->next;
+			free((*lst)->content);
+			free((*lst)->next);
+			free(*lst);
+			*lst = ptdr;
+		}
+		free(lst);
+	}
+}
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*rt;
 	t_list	*new;
 
-	if (!lst || !f || !del)
+	if (!lst || !f)
 		return (NULL);
 	rt = ft_lstnew(f(lst->content));
 	if (!rt)
@@ -29,13 +49,13 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		new->next = ft_lstnew(f(lst->content));
 		if (!new->next)
 		{
-			ft_lstclear(&rt, del);
+			delclear(&rt, del);
 			return (NULL);
 		}
 		new = new->next;
 		lst = lst->next;
 	}
 	new->next = NULL;
-	ft_lstclear(&lst, del);
+	delclear(&lst, del);
 	return (rt);
 }
