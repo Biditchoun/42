@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 22:59:50 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/06 14:39:46 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:20:32 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1475,7 +1475,6 @@ int	main()
 		return (1);
 	}
 	ft_free(split2);
-	printf("\noui\n");
 	//test 4
 	split1 = malloc(2 * sizeof (char *));
 	if (!split1)
