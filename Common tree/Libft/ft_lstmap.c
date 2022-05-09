@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:59:24 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/09 16:16:16 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:38:59 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,9 @@ static void	delclear(t_list **lst, void (*del)(void *))
 		while (lst && *lst)
 		{
 			ptdr = (*lst)->next;
-			free((*lst)->content);
-			free((*lst)->next);
 			free(*lst);
 			*lst = ptdr;
 		}
-		free(lst);
 	}
 }
 
