@@ -37,3 +37,8 @@ Si les espaces sont remplacés par des 0 (via les flags 0 ou .), ils viennent ap
 Flag : “ “
 Si aucun signe ne va être écrit, ajoute un espace au début
 Ne fonctionne que sur types d et i
+
+Type : s
+Sont ignorés : “+”, “#”, “ “
+“.” Est pris en compte seulement si pwidth < strlen(s). S’il y en a un il trim forcément s, même avec un autre width donné ensuite.
+Ne restent que Width, “-“, “0”
