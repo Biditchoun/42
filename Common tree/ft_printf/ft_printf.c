@@ -6,22 +6,44 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:02:17 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/16 18:09:35 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:55:41 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libftprintf.h>
+#include "libftprintf.h"
 
-static f_list	pars_init()
+static char	*zero_address(const char *s, int lim)
 {
-	list	rt;
+	int		i;
+	char	*zero;
 
-	rt{minus} = NULL;
-	rt{zero} = NULL;
-	rt{point} = NULL;
-	rt{hash} = NULL;
-	rt{space} = NULL;
-	rt{plus} = NULL;
+	i = 0;
+	while (i <= lim)
+	{
+		zero = ft_strnrchr(s, '0', lim - i);
+		if (zero)
+		{
+			while (*(zero - i) == '0')
+				i++;
+			if (!ft_isdigit(*(zero - i) || *(zero - i) != '.'))
+				break ;
+		}
+		else
+			break ;
+	}
+	return (zero);
+}
+
+static t_list	flags_addresses(const char *s, int lim)
+{
+	t_list	rt;
+
+	rt.minus = ft_strnrchr(s, '-', lim);
+	rt.zero = zero_address(s, lim);
+	rt.point = ft_strnrchr(s, '.', lim);
+	rt.hash = ft_strnrchr(s, '#', lim);
+	rt.space = ft_strnrchr(s, ' ', lim);
+	rt.plus = ft_strnrchr(s, '+', lim);
 	return (rt);
 }
 
@@ -31,20 +53,24 @@ static int	*parsing(const char *s, va_list args)
 	char	type;
 	int		i;
 	int		parsrt[2];
-	f_list	flag_list;
+	t_list	flag_list;
 
-	flag_list = pars_init();
 	flags = "0123456789-+# .";
 	i = 0;
 	while (ft_strchr(flags, s[i]))
 		i++;
 	type = s[i];
+	parsrt[0] = i;
+	flag_list = flags_addresses(s, i);
+	parsrt[1] = printfing(s, args, flag_list, type);
+	return (parsrt);
+}
 
 int	ft_printf(const char *s, ...)
 {
 	int		i;
 	int		rt;
-	int		parsrt[2];
+	int		*parsrt;
 	va_list	args;
 
 	if (!s)
@@ -60,9 +86,10 @@ int	ft_printf(const char *s, ...)
 		{
 			parsrt = parsing(&s[i], args);
 			i += parsrt[0];
-			rt += parsrt[1];
+			rt += parsrt[1] - 1;
 		}
 		rt++;
 	}
+	va_end(args);
 	return (rt);
 }

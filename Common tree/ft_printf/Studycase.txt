@@ -1,0 +1,39 @@
+Width :
+Si le width n’est pas assez grand pour contenir tous les caractères de l’argument, il est ignoré
+Le dernier width donné est pris en compte
+Le remplissage si le width est plus grand que l’argument se fait par des “ “
+
+Flag : “-“
+Affiche le bidule à gauche du vide au lieu de droite si le width est trop grand
+Aucun effet si pas de width
+
+Flag : “+”
+Oblige l’affichage du plus ou moins
+Ne fonctionne que sur types d et i
+
+Flag : “0”
+Si le width est trop grand, remplace les espaces par des 0
+Si un signe doit s’afficher, il le sera avant les 0
+Ignoré si présence du flag -
+Aucun effet si pas de width
+
+Flag : “.”
+Donne un width (doit être suivi d’un nombre qui peut commencer par 0 ou d’un *, sinon il prendra 0 comme paramètre)
+Si suivi d’un *, le width est donné en argument
+Le remplissage si le width est plus grand que l’argument se fait par des 0
+Types c et % : le flag . est ignoré
+Type s : réduit l’arg au width donné si strlen(s) > width
+Types d et i : le width donné ignore le signe (éventuellement ajouté par le flag “+”), signe qui se mettra avant les 0 de remplissage
+Type p : le width donné ignore le 0x
+Tyes x et X : si #, le width donné ignore le 0x/0X
+Le remplissage est ignoré si présence du flag -, sauf si un signe doit s’afficher
+
+Flag : “#”
+Sur type x : précède le résultat par 0x
+Sur type X : précède le résultat par 0X
+Aucun effet sur le reste
+Si les espaces sont remplacés par des 0 (via les flags 0 ou .), ils viennent après le 0x/0X
+
+Flag : “ “
+Si aucun signe ne va être écrit, ajoute un espace au début
+Ne fonctionne que sur types d et i
