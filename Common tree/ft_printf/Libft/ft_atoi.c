@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 09:22:42 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/05 16:56:16 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:11:36 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	weird_shit(int m, unsigned long long nb, int p)
 
 	if (!m && (nb > 9223372036854775807 || p > 18))
 		return (-1);
-	if (m && (nb > 9223372036854775807 || p > 18))
+	else if (m && (nb > 9223372036854775807 || p > 18))
 		return (0);
 	nba = nb;
 	if (m)
@@ -41,6 +41,8 @@ int	ft_atoi(const char *nptr)
 	if (nptr[i] == '+' || nptr[i] == '-')
 		if (nptr[i++] == '-')
 			m++;
+	while (nptr[i] == '0')
+		i++;
 	xp = i;
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 		nb = nb * 10 + nptr[i++] - '0';
