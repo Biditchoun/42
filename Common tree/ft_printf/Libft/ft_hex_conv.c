@@ -6,13 +6,13 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 21:34:38 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/26 21:57:51 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/29 08:27:48 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*hex_conv(unsigned long long nb)
+char	*ft_hex_conv(unsigned long long nb)
 {
 	unsigned long long	nbr;
 	char				*rt;
