@@ -6,28 +6,22 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 18:53:02 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/25 22:06:15 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/29 08:18:10 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libftprintf.h"
 
-static void	filling(char *str, char c, int n)
-{
-	while (n > -1)
-		str[n--] = c;
-}
-
-static char	*minus(char *s, char *rt, t_list flag_list, int len)
+static char	*minus(char *s, char *rt, t_f f_list, int len)
 {
 	ft_strlcpy(rt, s, len + 1);
-	filling(&rt[len], ' ', flag_list.width - len);
-	rt[flag_list.width + 1] = 0;
+	printfilling(&rt[len], ' ', f_list.width - len);
+	rt[f_list.width] = 0;
+	free(s);
 	return (rt);
 }
 
-char	*printf_str(t_list flag_list, char *arg)
+char	*printf_str(t_f f_list, char *arg)
 {
 	char	*rt;
 	char	*s;
@@ -36,20 +30,21 @@ char	*printf_str(t_list flag_list, char *arg)
 	s = ft_strdup(arg);
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) > flag_list.pwidth)
-		s[flag_list.pwidth] = 0;
+	if (f_list.point && ft_strlen(s) > f_list.pwidth)
+		s[f_list.pwidth] = 0;
 	len = ft_strlen(s);
-	if (!flag_list.width_ptr)
-		flag_list.width = len;
-	rt = malloc(sizeof (char) * (ft_max(flag_list.width, len) + 1));
+	if (!f_list.width_ptr)
+		f_list.width = len;
+	rt = malloc(sizeof (char) * (ft_max(f_list.width, len) + 1));
 	if (!rt)
-		return (NULL);
-	if (flag_list.minus)
-		return (minus(s, rt, flag_listi, len));
-	if (flag_list.zero)
-		filling(rt, '0', flag_list.width - len);
+		return (printfree(s));
+	if (f_list.minus)
+		return (minus(s, rt, f_list, len));
+	if (f_list.zero)
+		printfilling(rt, '0', f_list.width - len);
 	else
-		filling(rt, ' ', flag_list.width - len);
-	ft_strlcat(rt, s, len + 1);
+		printfilling(rt, ' ', f_list.width - len);
+	ft_strlcpy(&rt[ft_max(f_list.width - len, 0)], s, len + 1);
+	free(s);
 	return (rt);
 }

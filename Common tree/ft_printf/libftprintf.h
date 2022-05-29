@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:30:47 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/25 21:41:50 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/29 08:24:15 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 # include <stdarg.h>
 
 int		ft_printf(const char *s, ...);
-int		printfing(const char *s, va_list args, t_list flag_list, char type);
-char	*printf_char(t_list flag_list, char arg);
-char	*printf_str(t_list flag_list, char *arg);
+int		printfing(const char *s, va_list args, t_f f_list, char type);
+char	*printf_char(t_f f_list, char arg);
+char	*printf_str(t_f f_list, char *arg);
+char	*printf_void(t_f f_list, void *arg);
+
+int		printfilling(char *str, char c, int n);
+char	*printfree(char *s);
 
 typedef struct s_list
 {
@@ -31,6 +35,6 @@ typedef struct s_list
 	char	*width_ptr;
 	int		pwidth;
 	int		width;
-}t_list;
+}t_f;
 
 #endif

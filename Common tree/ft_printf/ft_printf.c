@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:02:17 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/25 19:56:37 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/29 08:29:31 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static char	*zero_address(const char *s, int lim)
 	return (zero);
 }
 
-static t_list	flags_addresses(const char *s, int lim)
+static t_f	flags_addresses(const char *s, int lim)
 {
-	t_list	rt;
+	t_f	rt;
 
 	rt.minus = ft_strnrchr(s, '-', lim);
 	rt.zero = zero_address(s, lim);
@@ -44,6 +44,9 @@ static t_list	flags_addresses(const char *s, int lim)
 	rt.hash = ft_strnrchr(s, '#', lim);
 	rt.space = ft_strnrchr(s, ' ', lim);
 	rt.plus = ft_strnrchr(s, '+', lim);
+	rt.width_ptr = NULL;
+	rt.pwidth = 0;
+	rt.width = 0;
 	return (rt);
 }
 
@@ -53,9 +56,9 @@ static int	*parsing(const char *s, va_list args)
 	char	type;
 	int		i;
 	int		parsrt[2];
-	t_list	flag_list;
+	t_f		flag_list;
 
-	flags = "0123456789-+# .";
+	flags = "0123456789-+# .*";
 	i = 0;
 	while (ft_strchr(flags, s[i]))
 		i++;

@@ -6,39 +6,43 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:58:23 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/25 22:02:47 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/05/29 07:46:09 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static void	filling(char *str, char c, int n)
+static char	*minus(t_f f_list, char *rt, char arg)
 {
-	while (n > -1)
-		str[n--] = c;
+	int	i;
+
+	i = 0;
+	if (arg)
+		rt[i++] = arg;
+	printfilling(&rt[i], ' ', f_list.width - i);
+	rt[f_list.width] = 0;
+	return (rt);
 }
 
-char	*printf_char(t_list flag_list, char arg)
+char	*printf_char(t_f f_list, char arg)
 {
 	char	*rt;
 
-	if (!flag_list.width)
-		flag_list.width = 1;
-	rt = malloc(sizeof (char) * (flag_list.width + 1));
+	if (!f_list.width)
+		f_list.width = 1;
+	if (!arg)
+		f_list.width--;
+	rt = malloc(sizeof (char) * (f_list.width + 1));
 	if (!rt)
 		return (NULL);
-	if (flag_list.minus)
-	{
-		rt[0] = arg;
-		filling(&rt[1], ' ', flag_list.width - 1);
-		rt[flag_list.width + 1] = 0;
-		return (rt);
-	}
-	if (flag_list.zero)
-		filling(rt, '0', flag_list.width - 1);
+	if (f_list.minus)
+		return (minus(f_list, rt, arg));
+	if (f_list.zero)
+		printfilling(rt, '0', f_list.width);
 	else
-		filling(rt, ' ', flag_list.width - 1);
-	rt[flag_list.width] = arg;
-	rt[flag_list.width + 1] = 0;
+		printfilling(rt, ' ', f_list.width);
+	if (!arg)
+		rt[f_list.width - 1] = arg;
+	rt[f_list.width] = 0;
 	return (rt);
 }
