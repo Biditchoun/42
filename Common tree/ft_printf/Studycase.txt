@@ -51,7 +51,14 @@ Type : p
 Sont ignorés : “+”, “#”, “ “
 Le width donné par “.” ne prend pas le 0x en compte, contrairement au width normal, sinon les deux ont le même comportement
 Le flag “0” insère le white space après le 0x
-S’il y a un pwidth et un width : “0” est ignoré et l’éventuel whitespace de width est composé d’espaces
+S’il y a un pwidth et un width : “0” est ignoré et l’éventuel whitespace de width est composé d’espaces (et celui de pwidth de 0)
+
+Type : i, d
+Est ignoré : “#”
+“0” est ignoré si “.” ou “-“
+“ “ force l’ajout d’un espace devant le nombre si pas de signe, au mépris des widths, “-“ et “0”
+Le white space de “0” et “.” sera toujours entre le signe et le nombre
+Le pwidth ne prendra jamais le signe ou “ “ en compte
 
 Type : %
 Se comporte comme le type c
