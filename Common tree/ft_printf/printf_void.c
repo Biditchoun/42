@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:32 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/31 12:22:13 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/01 13:35:38 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*ft_25(char *rt, t_f f_list, char *hex, int len)
 	int	i;
 
 	i = 0;
-	//Pour la condition en-dessous : soit il faut qu'il y ait un point s'il y a un zero, soit faut qu'il n'y ait pas de zero
+//Pour la condition en-dessous : soit il faut qu'il y ait un point s'il y a un zero, soit faut qu'il n'y ait pas de zero
 	if ((f_list.point || !f_list.zero) && f_list.width > f_list.pwidth)
 		i += printfilling(rt, ' ', f_list.width - f_list.pwidth - 2);
 	i += ft_strlcpy(&rt[i], "0x", 3);
@@ -56,8 +56,7 @@ char	*printf_void(t_f f_list, void *arg)
 	if (!hex)
 		return (NULL);
 	len = ft_strlen(hex);
-	if (f_list.pwidth + 2 > f_list.width)
-		f_list.width = f_list.pwidth + 2;
+	f_list.width = ft_max(f_list.width, f_list.pwidth + 2);
 	rt = malloc(sizeof(char) * (ft_max(f_list.width, len + 2) + 1));
 	if (!rt)
 		return (printfree(hex));
