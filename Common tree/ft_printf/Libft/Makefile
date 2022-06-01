@@ -6,12 +6,12 @@
 #    By: swijnber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/15 11:15:02 by swijnber          #+#    #+#              #
-#    Updated: 2022/05/29 08:28:10 by swijnber         ###   ########.fr        #
+#    Updated: 2022/06/01 13:02:14 by swijnber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	ft_isprint.c ft_isdigit.c ft_isascii.c ft_isalpha.c ft_isalnum.c\
-			ft_min.c ft_max.c\
+			ft_min.c ft_max.c ft_power.c\
 			ft_strlen.c ft_strncmp.c ft_strlcpy.c ft_strlcat.c ft_strchr.c \
 			ft_strrchr.c ft_strnrchr.c ft_strnstr.c\
 			ft_toupper.c ft_tolower.c ft_atoi.c ft_itoa.c ft_hex_conv.c \

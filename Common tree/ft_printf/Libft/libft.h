@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 21:25:52 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/29 08:28:02 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/01 13:04:55 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
+long	ft_power(int e, int p);
 int		ft_isprint(int c);
 int		ft_isdigit(int c);
 int		ft_isascii(int c);
@@ -47,7 +48,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strtrim(const char *s1, const char *set);
 char	**ft_split(const char *s, char c);
-char	*ft_itoa(int n);
+char	*ft_itoa(long n);
 char	*ft_hex_conv(unsigned long long nb);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
