@@ -59,6 +59,17 @@ Est ignoré : “#”
 “ “ force l’ajout d’un espace devant le nombre si pas de signe, au mépris des widths, “-“ et “0”
 Le white space de “0” et “.” sera toujours entre le signe et le nombre
 Le pwidth ne prendra jamais le signe ou “ “ en compte
+À l’instar de p, on peut voir du white space rempli par des ‘ ‘ et des ‘0’ s’il y a un width et un pwidth
+
+Type : u
+Sont ignorés : “+”, “#”, “ “
+“0” est ignoré si “.” ou “-“
+À l’instar de p, on peut voir du white space rempli par des ‘ ‘ et des ‘0’ s’il y a un width et un pwidth
+
+Type : x, X
+Sont ignorés : “+”, “ “
+“0” est ignoré si “.” ou “-“
+“.” ignore le 0x/0X
 
 Type : %
 Se comporte comme le type c

@@ -6,34 +6,34 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:18:59 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/01 12:57:12 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:50:11 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static void	pwidth_det(const char *s, va_list args, t_f f_list, char type)
+static void	pwidth_det(const char *s, va_list args, t_f lag, char type)
 {
 	int	i;
 
 	i = -1;
 	while (s[++i] != type)
 		if (s[i] == '.' && s[i + 1] == '*')
-			f_list.pwidth = va_arg(args, int);
-	if (f_list.point && f_list.point[1] != '*')
-		f_list.pwidth = ft_atoi(&f_list.point[1]);
+			lag.pwidth = va_arg(args, int);
+	if (lag.point && lag.point[1] != '*')
+		lag.pwidth = ft_atoi(&lag.point[1]);
 }
 
-static void	width_det(const char *s, va_list args, t_f f_list, char type)
+static void	width_det(const char *s, va_list args, t_f lag, char type)
 {
 	int	i;
 
-	pwidth_det(s, args, f_list, type);
+	pwidth_det(s, args, lag, type);
 	i = -1;
 	while (s[++i] != type)
 		if (s[i] == '*' && s[i - 1] != '.')
-			f_list.width = va_arg(args, int);
-	f_list.width_ptr = ft_strnrchr(s, '*', i);
+			lag.width = va_arg(args, int);
+	lag.width_ptr = ft_strnrchr(s, '*', i);
 	while (i > -1)
 	{
 		while (i > -1 && (!ft_isdigit(s[i]) || s[i] == '0'))
@@ -43,33 +43,33 @@ static void	width_det(const char *s, va_list args, t_f f_list, char type)
 		if ((i > -1 && s[i] != '.') || (i == -1 && ft_isdigit(s[i + 1])))
 			break ;
 	}
-	if (++i > 0 && &s[i] > f_list.width_ptr)
-		f_list.width_ptr = (char *)&s[i];
-	if (i > 0 && (char *)&s[i] == f_list.width_ptr)
-		f_list.width = (ft_atoi(&s[i]));
+	if (++i > 0 && &s[i] > lag.width_ptr)
+		lag.width_ptr = (char *)&s[i];
+	if (i > 0 && (char *)&s[i] == lag.width_ptr)
+		lag.width = (ft_atoi(&s[i]));
 }
 
-int	printfing(const char *s, va_list args, t_f f_list, char type)
+int	printfing(const char *s, va_list args, t_f lag, char type)
 {
 	char	*print;
 	int		rt;
 
-	width_det(s, args, f_list, type);
+	width_det(s, args, lag, type);
 	print = NULL;
 	if (type == 'c')
-		print = printf_char(f_list, va_arg(args, int));
+		print = printf_char(lag, va_arg(args, int));
 	else if (type == 's')
-		print = printf_str(f_list, va_arg(args, char *));
+		print = printf_str(lag, va_arg(args, char *));
 	else if (type == 'p')
-		print = printf_void(f_list, va_arg(args, void *));
+		print = printf_void(lag, va_arg(args, void *));
 	else if (type == 'd' || type == 'i')
-		print = printf_int(f_list, va_arg(args, int));
+		print = printf_int(lag, va_arg(args, int));
 	else if (type == 'u')
-		print = printf_uint(f_list, va_arg(args, unsigned int));
+		print = printf_uint(lag, va_arg(args, unsigned int));
 	else if (type == 'x' || type == 'X')
-		print = printf_hex(f_list, va_arg(args, unsigned long long), type);
+		print = printf_hex(lag, va_arg(args, unsigned long long), type);
 	else if (type == '%')
-		print = printf_char(f_list, '%');
+		print = printf_char(lag, '%');
 	if (!print)
 		return (0);
 	rt = ft_strlen(print);

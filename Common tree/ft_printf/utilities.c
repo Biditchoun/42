@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 23:41:24 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/31 11:39:14 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:38:05 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	printfilling(char *str, char c, int n)
 		str[i] = c;
 	if (n < 0)
 		n = 0;
+	str[i] = 0;
 	return (n);
 }
 
