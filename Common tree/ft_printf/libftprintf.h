@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:30:47 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/02 14:46:08 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:21:41 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 # define LIBFTPRINTF_H
 
 # include <stdarg.h>
+# include "libft.h"
+
+typedef struct s_f
+{
+	char	*minus;
+	char	*zero;
+	char	*hash;
+	char	*space;
+	char	*plus;
+	char	*point;
+	char	*width_ptr;
+	int		pwidth;
+	int		width;
+}	t_f;
 
 int		ft_printf(const char *s, ...);
 int		printfing(const char *s, va_list args, t_f lag, char type);
@@ -26,18 +40,5 @@ char	*printf_hex(t_f lag, unsigned long long arg, char type);
 
 int		printfilling(char *str, char c, int n);
 char	*printfree(char *s);
-
-typedef struct s_list
-{
-	char	*minus;
-	char	*zero;
-	char	*hash;
-	char	*space;
-	char	*plus;
-	char	*point;
-	char	*width_ptr;
-	int		pwidth;
-	int		width;
-}t_f;
 
 #endif

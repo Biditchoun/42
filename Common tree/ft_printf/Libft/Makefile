@@ -6,7 +6,7 @@
 #    By: swijnber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/15 11:15:02 by swijnber          #+#    #+#              #
-#    Updated: 2022/06/02 11:20:47 by swijnber         ###   ########.fr        #
+#    Updated: 2022/06/02 18:16:21 by swijnber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,11 @@ SRCS	=	ft_isprint.c ft_isdigit.c ft_isascii.c ft_isalpha.c ft_isalnum.c\
 			ft_strdup.c ft_calloc.c ft_substr.c ft_strjoin.c ft_strtrim.c \
 			ft_split.c\
 			ft_strmapi.c ft_striteri.c\
-			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
+			ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
 			ft_lstiter.c ft_lstmap.c
 OBJS	=	${SRCS:.c=.o}
-OBJUS	=	${BONUS:.c=.o}
 NAME	=	libft.a
 CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
@@ -39,11 +38,8 @@ ${NAME}:	${OBJS}
 
 all:		${NAME}
 
-bonus:		${OBJUS}
-			ar -rcs ${NAME} $^
-
 clean:	
-			rm -f ${OBJS} ${OBJUS}
+			rm -f ${OBJS}
 
 fclean:		clean
 			rm -f ${NAME}
@@ -51,4 +47,4 @@ fclean:		clean
 re:			fclean
 			${MAKE}
 
-.PHONY:		all bonus clean fclean re
+.PHONY:		all clean fclean re
