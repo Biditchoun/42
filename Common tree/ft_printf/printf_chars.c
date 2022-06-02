@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:58:23 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/02 14:50:57 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:03:40 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	*printf_char(t_f lag, char arg)
 		rt[i++] = arg;
 	if (lag.minus)
 		i += printfilling(&rt[i], ' ', lag.width - 1);
-	rt[i] = 0;
 	return (rt);
 }
 
