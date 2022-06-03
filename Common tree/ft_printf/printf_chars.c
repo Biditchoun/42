@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:58:23 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/02 15:03:40 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:18:55 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@ char	*printf_char(t_f lag, char arg)
 	char	*rt;
 	int		i;
 
-	if (!arg && lag.width)
+	lag.width = ft_max(lag.width, 1);
+	if (!arg)
 		lag.width--;
 	rt = malloc(sizeof (char) * (lag.width + 1));
 	if (!rt)
 		return (NULL);
 	i = 0;
 	if (!lag.minus && lag.zero)
-		i += printfilling(rt, '0', lag.width - 1);
+		i += printfill(rt, '0', lag.width - 1);
 	else if (!lag.minus)
-		i += printfilling(rt, ' ', lag.width - 1);
-	if (!arg)
+		i += printfill(rt, ' ', lag.width - 1);
+	if (arg)
 		rt[i++] = arg;
 	if (lag.minus)
-		i += printfilling(&rt[i], ' ', lag.width - 1);
+		i += printfill(&rt[i], ' ', lag.width - 1);
 	return (rt);
 }
 
@@ -44,7 +45,7 @@ char	*printf_str(t_f lag, char *arg)
 	s = ft_strdup(arg);
 	if (!s)
 		return (NULL);
-	if (lag.point && ft_strlen(s) > lag.pwidth)
+	if (lag.point && (int)ft_strlen(s) > lag.pwidth)
 		s[lag.pwidth] = 0;
 	len = ft_strlen(s);
 	rt = malloc(sizeof (char) * (ft_max(lag.width, len) + 1));

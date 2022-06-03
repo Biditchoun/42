@@ -6,7 +6,7 @@
 #    By: swijnber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/02 17:17:59 by swijnber          #+#    #+#              #
-#    Updated: 2022/06/02 18:30:42 by swijnber         ###   ########.fr        #
+#    Updated: 2022/06/03 17:24:00 by swijnber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS		=	ft_printf.c\
 				utilities.c
 OBJS		=	${SRCS:.c=.o}
 NAME		=	libftprintf.a
+LIBFT		=	libft.a
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 INCLUDES	=	-I./ -I./Libft
@@ -26,7 +27,7 @@ INCLUDES	=	-I./ -I./Libft
 
 ${NAME}:		${OBJS}
 				make -C Libft 
-				cp Libft/libft.a .
+				cp Libft/${LIBFT} ${NAME}
 				ar -rcs $@ $^
 
 all:			${NAME}

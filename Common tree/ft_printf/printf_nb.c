@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 10:24:16 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/02 14:48:52 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:54:48 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	ft_25(t_f lag, char *rt, char *nb, int len)
 	int	sign;
 
 	sign = 0;
-	if ((lag.plus || lag.space) && arg > -1)
+	if ((lag.plus || lag.space) && nb[0] != '-')
 		sign++;
 	i = 0;
-	if (!lag.minus && !lag.zero || lag.point)
+	if (!lag.minus && (!lag.zero || lag.point))
 		i += printfill(rt, ' ', lag.width - ft_max(lag.pwidth, len) - sign);
 	if (nb[0] == '-')
 		rt[i++] = '-';

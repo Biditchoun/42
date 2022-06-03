@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:02:17 by swijnber          #+#    #+#             */
-/*   Updated: 2022/05/29 08:29:31 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:02:42 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,29 @@ static int	*parsing(const char *s, va_list args)
 	char	*flags;
 	char	type;
 	int		i;
-	int		parsrt[2];
+	int		*parsrt;
 	t_f		flag_list;
 
+	parsrt = malloc(sizeof(int) * 2);
+	if (!parsrt)
+		return (NULL);
 	flags = "0123456789-+# .*";
 	i = 0;
 	while (ft_strchr(flags, s[i]))
 		i++;
 	type = s[i];
-	parsrt[0] = i;
+	parsrt[0] = i + 1;
 	flag_list = flags_addresses(s, i);
 	parsrt[1] = printfing(s, args, flag_list, type);
 	return (parsrt);
 }
 
-int	ft_printf(const char *s, ...)
+static int	ftnirp_ft(const char *s, va_list args)
 {
-	int		i;
-	int		rt;
-	int		*parsrt;
-	va_list	args;
+	int	i;
+	int	rt;
+	int	*parsrt;
 
-	if (!s)
-		return (0);
-	va_start(args, s);
 	rt = 0;
 	i = 0;
 	while (s[i])
@@ -88,11 +87,29 @@ int	ft_printf(const char *s, ...)
 		else
 		{
 			parsrt = parsing(&s[i], args);
+			if (!parsrt)
+			{
+				write(1, "\nA malloc failed", 16);
+				break ;
+			}
 			i += parsrt[0];
 			rt += parsrt[1] - 1;
+			free(parsrt);
 		}
 		rt++;
 	}
+	return (rt);
+}
+
+int	ft_printf(const char *s, ...)
+{
+	int		rt;
+	va_list	args;
+
+	if (!s)
+		return (0);
+	va_start(args, s);
+	rt = ftnirp_ft(s, args);
 	va_end(args);
 	return (rt);
 }

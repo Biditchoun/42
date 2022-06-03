@@ -6,13 +6,13 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 23:41:24 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/02 14:38:05 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:10:18 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	printfilling(char *str, char c, int n)
+int	printfill(char *str, char c, int n)
 {
 	int	i;
 
