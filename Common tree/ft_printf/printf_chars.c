@@ -6,11 +6,11 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:58:23 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/03 17:18:55 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:05:48 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*printf_char(t_f lag, char arg)
 {

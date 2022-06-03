@@ -6,11 +6,11 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:18:59 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/03 17:00:24 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:05:17 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static void	pwidth_det(const char *s, va_list args, t_f lag, char type)
 {

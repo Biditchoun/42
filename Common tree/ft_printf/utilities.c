@@ -6,11 +6,11 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 23:41:24 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/03 17:10:18 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:05:59 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	printfill(char *str, char c, int n)
 {

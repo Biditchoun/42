@@ -6,11 +6,11 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 10:24:16 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/03 14:54:48 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:06:19 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static void	ft_25(t_f lag, char *rt, char *nb, int len)
 {

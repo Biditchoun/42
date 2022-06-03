@@ -6,7 +6,7 @@
 #    By: swijnber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/02 17:17:59 by swijnber          #+#    #+#              #
-#    Updated: 2022/06/03 17:24:00 by swijnber         ###   ########.fr        #
+#    Updated: 2022/06/03 18:04:45 by swijnber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ ${NAME}:		${OBJS}
 
 all:			${NAME}
 
+bonus:			${NAME}
+
 clean:
 				rm -f ${OBJS}
 				make clean -C Libft
@@ -43,4 +45,4 @@ fclean:			clean
 re:				fclean
 				${MAKE}
 
-.PHONY:			all clean fclean re
+.PHONY:			all bonus clean fclean re
