@@ -19,6 +19,8 @@ char	*ft_hex_conv(unsigned long long nb)
 	char				*base;
 	int					i;
 
+	if (!nb)
+		return (ft_strdup("0"));
 	i = 0;
 	nbr = nb;
 	while (nbr && i++ > -1)
