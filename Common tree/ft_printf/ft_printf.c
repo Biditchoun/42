@@ -56,7 +56,7 @@ static int	*parsing(const char *s, va_list args)
 	char	type;
 	int		i;
 	int		*parsrt;
-	t_f		flag_list;
+	t_f		lag;
 
 	parsrt = malloc(sizeof(int) * 2);
 	if (!parsrt)
@@ -67,8 +67,8 @@ static int	*parsing(const char *s, va_list args)
 		i++;
 	type = s[i];
 	parsrt[0] = i + 1;
-	flag_list = flags_addresses(s, i);
-	parsrt[1] = printfing(s, args, flag_list, type);
+	lag = flags_addresses(s, i);
+	parsrt[1] = printfing(s, args, lag, type);
 	return (parsrt);
 }
 

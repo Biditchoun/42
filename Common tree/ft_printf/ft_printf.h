@@ -15,7 +15,7 @@
 
 # include <stdarg.h>
 # include "Libft/libft.h"
-
+# include <stdio.h>
 typedef struct s_f
 {
 	char	*minus;
@@ -36,7 +36,7 @@ char	*printf_str(t_f lag, char *arg);
 char	*printf_void(t_f lag, void *arg);
 char	*printf_int(t_f lag, int arg);
 char	*printf_uint(t_f lag, unsigned int arg);
-char	*printf_hex(t_f lag, unsigned long long arg, char type);
+char	*printf_hex(t_f lag, unsigned int arg, char type);
 
 int		printfill(char *str, char c, int n);
 char	*printfree(char *s);

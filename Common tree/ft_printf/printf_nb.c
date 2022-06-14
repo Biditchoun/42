@@ -78,7 +78,7 @@ char	*printf_uint(t_f lag, unsigned int arg)
 		return (NULL);
 	len = ft_strlen(nb);
 	lag.width = ft_max(lag.width, lag.pwidth);
-	rt = malloc(sizeof(char) * (lag.width + 1));
+	rt = malloc(sizeof(char) * (ft_max(lag.width, len) + 1));
 	if (!rt)
 		return (printfree(nb));
 	i = 0;
@@ -89,7 +89,7 @@ char	*printf_uint(t_f lag, unsigned int arg)
 	i += printfill(&rt[i], '0', lag.pwidth - len);
 	i += ft_strlcpy(&rt[i], nb, len + 1);
 	if (lag.minus)
-		printfill(&rt[i], ' ', lag.width - ft_max(len, lag.pwidth));
+		i += printfill(&rt[i], ' ', lag.width - ft_max(len, lag.pwidth));
 	free(nb);
 	return (rt);
 }
@@ -119,7 +119,7 @@ static void	ft_25_2(t_f lag, char *rt, char *nb, char type)
 		printfill(&rt[i], ' ', lag.width - ft_max(lag.pwidth, len) - ox);
 }
 
-char	*printf_hex(t_f lag, unsigned long long arg, char type)
+char	*printf_hex(t_f lag, unsigned int arg, char type)
 {
 	char	*nb;
 	char	*rt;

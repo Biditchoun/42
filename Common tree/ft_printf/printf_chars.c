@@ -18,8 +18,6 @@ char	*printf_char(t_f lag, char arg)
 	int		i;
 
 	lag.width = ft_max(lag.width, 1);
-	if (!arg)
-		lag.width--;
 	rt = malloc(sizeof (char) * (lag.width + 1));
 	if (!rt)
 		return (NULL);
@@ -30,9 +28,27 @@ char	*printf_char(t_f lag, char arg)
 		i += printfill(rt, ' ', lag.width - 1);
 	if (arg)
 		rt[i++] = arg;
+	rt[i] = 0;
 	if (lag.minus)
 		i += printfill(&rt[i], ' ', lag.width - 1);
 	return (rt);
+}
+
+static char	*ft_25(t_f lag, char *arg)
+{
+	char	*s;
+
+	if (!arg)
+		s = ft_strdup("(null)");
+	else
+		s = ft_strdup(arg);
+	if (!s)
+		return (NULL);
+	if (!arg && lag.point && lag.pwidth < 6)
+		s[0] = 0;
+	else if (lag.point && lag.pwidth < (int)ft_strlen(s))
+		s[lag.pwidth] = 0;
+	return (s);
 }
 
 char	*printf_str(t_f lag, char *arg)
@@ -42,11 +58,9 @@ char	*printf_str(t_f lag, char *arg)
 	int		len;
 	int		i;
 
-	s = ft_strdup(arg);
+	s = ft_25(lag, arg);
 	if (!s)
 		return (NULL);
-	if (lag.point && (int)ft_strlen(s) > lag.pwidth)
-		s[lag.pwidth] = 0;
 	len = ft_strlen(s);
 	rt = malloc(sizeof (char) * (ft_max(lag.width, len) + 1));
 	if (!rt)
@@ -63,31 +77,49 @@ char	*printf_str(t_f lag, char *arg)
 	return (rt);
 }
 
+static char	*ft_25_2(t_f lag, char *rt, char *hex, int nil)
+{
+	int	len;
+	int	i;
+
+	len = ft_strlen(hex);
+	i = 0;
+	if (!lag.minus && (lag.point || !lag.zero))
+		i += printfill(rt, ' ', lag.width - ft_max(lag.pwidth, len) - nil);
+	if (nil)
+		i += ft_strlcpy(&rt[i], "0x", 3);
+	if (nil)
+		i += printfill(&rt[i], '0', lag.pwidth - len);
+	if (!lag.minus && !lag.point && lag.zero)
+		i += printfill(&rt[i], '0', lag.width - ft_max(lag.pwidth, len) - nil);
+	i += ft_strlcpy(&rt[i], hex, len + 1);
+	if (lag.minus)
+		printfill(&rt[i], ' ', lag.width - ft_max(lag.pwidth, len) - nil);
+	free(hex);
+	return (rt);
+}
+
 char	*printf_void(t_f lag, void *arg)
 {
 	char	*hex;
 	char	*rt;
 	int		len;
-	int		i;
+	int		nil;
 
-	hex = ft_hex_conv((unsigned long long)arg);
+	if (arg)
+		hex = ft_hex_conv((unsigned long long)arg);
+	else
+		hex = ft_strdup("(nil)");
 	if (!hex)
 		return (NULL);
 	len = ft_strlen(hex);
-	lag.width = ft_max(lag.width, lag.pwidth + 2);
-	rt = malloc(sizeof(char) * (ft_max(lag.width, len + 2) + 1));
+	nil = 2;
+	if (!arg)
+		nil = 0;
+	if (nil)
+		lag.width = ft_max(lag.width, lag.pwidth + nil);
+	rt = malloc(sizeof(char) * (ft_max(lag.width, len + nil) + 1));
 	if (!rt)
 		return (printfree(hex));
-	i = 0;
-	if (!lag.minus && (lag.point || !lag.zero))
-		i += printfill(rt, ' ', lag.width - ft_max(lag.pwidth, len) - 2);
-	i += ft_strlcpy(&rt[i], "0x", 3);
-	i += printfill(&rt[i], '0', lag.pwidth - len);
-	if (!lag.minus && !lag.point && lag.zero)
-		i += printfill(&rt[i], '0', lag.width - ft_max(lag.pwidth, len) - 2);
-	i += ft_strlcpy(&rt[i], hex, len + 1);
-	if (lag.minus)
-		printfill(&rt[i], ' ', lag.width - ft_max(lag.pwidth, len) - 2);
-	free(hex);
-	return (rt);
+	return (ft_25_2(lag, rt, hex, nil));
 }

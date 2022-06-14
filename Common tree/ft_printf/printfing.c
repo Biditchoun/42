@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	pwidth_det(const char *s, va_list args, t_f lag, char type)
+static t_f	pwidth_det(const char *s, va_list args, t_f lag, char type)
 {
 	int	i;
 
@@ -22,13 +22,14 @@ static void	pwidth_det(const char *s, va_list args, t_f lag, char type)
 			lag.pwidth = va_arg(args, int);
 	if (lag.point && lag.point[1] != '*')
 		lag.pwidth = ft_atoi(&lag.point[1]);
+	return (lag);
 }
 
-static void	width_det(const char *s, va_list args, t_f lag, char type)
+static t_f	width_det(const char *s, va_list args, t_f lag, char type)
 {
 	int	i;
 
-	pwidth_det(s, args, lag, type);
+	lag = pwidth_det(s, args, lag, type);
 	i = -1;
 	while (s[++i] != type)
 		if (s[i] == '*' && s[i - 1] != '.')
@@ -47,17 +48,37 @@ static void	width_det(const char *s, va_list args, t_f lag, char type)
 		lag.width_ptr = (char *)&s[i];
 	if (i > 0 && (char *)&s[i] == lag.width_ptr)
 		lag.width = (ft_atoi(&s[i]));
+	return (lag);
 }
 
-int	printfing(const char *s, va_list args, t_f lag, char type)
+static int	ft_25(int c, char *print)
+{
+	int	rt;
+
+	if (!print)
+		return (0);
+	if (!c)
+		rt = 1;
+	else
+		rt = 0;
+	rt += ft_strlen(print);
+	write(1, print, rt);
+	free(print);
+	return (rt);
+}
+
+int     printfing(const char *s, va_list args, t_f lag, char type)
 {
 	char	*print;
-	int		rt;
+	int		c;
 
-	width_det(s, args, lag, type);
+	lag = width_det(s, args, lag, type);
 	print = NULL;
+	c = -1;
 	if (type == 'c')
-		print = printf_char(lag, va_arg(args, int));
+		c = va_arg(args, int);
+	if (type == 'c')
+		print = printf_char(lag, c);
 	else if (type == 's')
 		print = printf_str(lag, va_arg(args, char *));
 	else if (type == 'p')
@@ -67,13 +88,8 @@ int	printfing(const char *s, va_list args, t_f lag, char type)
 	else if (type == 'u')
 		print = printf_uint(lag, va_arg(args, unsigned int));
 	else if (type == 'x' || type == 'X')
-		print = printf_hex(lag, va_arg(args, unsigned long long), type);
+		print = printf_hex(lag, va_arg(args, unsigned int), type);
 	else if (type == '%')
 		print = printf_char(lag, '%');
-	if (!print)
-		return (0);
-	rt = ft_strlen(print);
-	write(1, print, rt);
-	free(print);
-	return (rt);
+	return (ft_25(c, print));
 }
