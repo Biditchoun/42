@@ -101,15 +101,15 @@ static void	ft_25_2(t_f lag, char *rt, char *nb, char type)
 	int	ox;
 
 	ox = 0;
-	if (lag.hash)
+	if (lag.hash && nb[0] != '0')
 		ox = 2;
 	len = ft_strlen(nb);
 	i = 0;
 	if (!lag.minus && (lag.point || !lag.zero))
 		i += printfill(rt, ' ', lag.width - ft_max(lag.pwidth, len) - ox);
-	if (lag.hash && type == 'x')
+	if (lag.hash && nb[0] != '0' && type == 'x')
 		i += ft_strlcpy(&rt[i], "0x", 3);
-	else if (lag.hash && type == 'X')
+	else if (lag.hash && nb[0] != '0' && type == 'X')
 		i += ft_strlcpy(&rt[i], "0X", 3);
 	i += printfill(&rt[i], '0', lag.pwidth - len);
 	if (!lag.minus && !lag.point && lag.zero)
@@ -133,7 +133,7 @@ char	*printf_hex(t_f lag, unsigned int arg, char type)
 		nb = ft_str_toupper(nb);
 	len = ft_strlen(nb);
 	ox = 0;
-	if (lag.hash)
+	if (lag.hash && arg)
 		ox = 2;
 	lag.width = ft_max(lag.pwidth + ox, lag.width);
 	rt = malloc(sizeof(char) * (ft_max(lag.width, len + ox) + 1));

@@ -61,7 +61,9 @@ char	*printf_str(t_f lag, char *arg)
 	s = ft_25(lag, arg);
 	if (!s)
 		return (NULL);
-	len = ft_strlen(s);
+	len = ft_max(ft_strlen(s), 1);
+	if (!s[0])
+		lag.width++;
 	rt = malloc(sizeof (char) * (ft_max(lag.width, len) + 1));
 	if (!rt)
 		return (printfree(s));

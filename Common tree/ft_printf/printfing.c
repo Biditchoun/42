@@ -44,9 +44,9 @@ static t_f	width_det(const char *s, va_list args, t_f lag, char type)
 		if ((i > -1 && s[i] != '.') || (i == -1 && ft_isdigit(s[i + 1])))
 			break ;
 	}
-	if (++i > 0 && &s[i] > lag.width_ptr)
+	if (&s[++i] > lag.width_ptr)
 		lag.width_ptr = (char *)&s[i];
-	if (i > 0 && (char *)&s[i] == lag.width_ptr)
+	if ((char *)&s[i] == lag.width_ptr)
 		lag.width = (ft_atoi(&s[i]));
 	return (lag);
 }
