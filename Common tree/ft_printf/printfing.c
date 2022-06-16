@@ -67,7 +67,7 @@ static int	ft_25(int c, char *print)
 	return (rt);
 }
 
-int     printfing(const char *s, va_list args, t_f lag, char type)
+int	printfing(const char *s, va_list args, t_f lag, char type)
 {
 	char	*print;
 	int		c;
