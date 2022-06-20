@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:58:23 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/03 18:05:48 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:31:37 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ char	*printf_char(t_f lag, char arg)
 		i += printfill(rt, '0', lag.width - 1);
 	else if (!lag.minus)
 		i += printfill(rt, ' ', lag.width - 1);
-	if (arg)
-		rt[i++] = arg;
-	rt[i] = 0;
+	rt[i++] = arg;
 	if (lag.minus)
 		i += printfill(&rt[i], ' ', lag.width - 1);
+	rt[i] = 0;
 	return (rt);
 }
 
@@ -111,7 +110,7 @@ char	*printf_void(t_f lag, void *arg)
 	if (arg)
 		hex = ft_hex_conv((unsigned long long)arg);
 	else
-		hex = ft_strdup("(nil)");
+		hex = ft_strdup("0x0");
 	if (!hex)
 		return (NULL);
 	len = ft_strlen(hex);

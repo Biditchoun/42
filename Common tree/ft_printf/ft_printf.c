@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:02:17 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/03 18:05:35 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:02:48 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,15 @@ static int	*parsing(const char *s, va_list args)
 	if (!parsrt)
 		return (NULL);
 	flags = "0123456789-+# .*";
-	i = 0;
+	i = 1;
 	while (ft_strchr(flags, s[i]))
 		i++;
 	type = s[i];
-	parsrt[0] = i + 1;
+	parsrt[0] = i;
 	lag = flags_addresses(s, i);
-	parsrt[1] = printfing(s, args, lag, type);
+	if (!s[1])
+		return (0);
+	parsrt[1] = printfing(&s[1], args, lag, type);
 	return (parsrt);
 }
 
@@ -86,7 +88,7 @@ static int	ftnirp_ft(const char *s, va_list args)
 			write(1, &s[i - 1], 1);
 		else
 		{
-			parsrt = parsing(&s[i], args);
+			parsrt = parsing(&s[i - 1], args);
 			if (!parsrt)
 			{
 				write(1, "\nA malloc failed", 16);

@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:18:59 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/03 18:05:17 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:48:56 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,18 @@ static t_f	width_det(const char *s, va_list args, t_f lag, char type)
 	return (lag);
 }
 
-static int	ft_25(int c, char *print)
+static int	ft_25(t_f lag, int c, char *print)
 {
 	int	rt;
 
 	if (!print)
 		return (0);
-	if (!c)
-		rt = 1;
+	if (c)
+		rt = ft_strlen(print);
+	else if (!lag.minus)
+		rt = ft_strlen(print) + 1;
 	else
-		rt = 0;
-	rt += ft_strlen(print);
+		rt = ft_strlen(&print[1]) + 1;
 	write(1, print, rt);
 	free(print);
 	return (rt);
@@ -89,7 +90,7 @@ int	printfing(const char *s, va_list args, t_f lag, char type)
 		print = printf_uint(lag, va_arg(args, unsigned int));
 	else if (type == 'x' || type == 'X')
 		print = printf_hex(lag, va_arg(args, unsigned int), type);
-	else if (type == '%')
-		print = printf_char(lag, '%');
-	return (ft_25(c, print));
+	else
+		print = printf_char(lag, type);
+	return (ft_25(lag, c, print));
 }
