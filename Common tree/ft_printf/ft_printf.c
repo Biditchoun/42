@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:02:17 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/20 16:02:48 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 10:36:15 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	*parsing(const char *s, va_list args)
 	return (parsrt);
 }
 
-static int	ftnirp_ft(const char *s, va_list args)
+static int	ftnirp_tf(const char *s, va_list args)
 {
 	int	i;
 	int	rt;

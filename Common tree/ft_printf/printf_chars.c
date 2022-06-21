@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:58:23 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/20 15:31:37 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 10:31:37 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*printf_char(t_f lag, char arg)
 	return (rt);
 }
 
-static char	*ft_25(t_f lag, char *arg)
+static char	*rts_ftnirp(t_f lag, char *arg)
 {
 	char	*s;
 
@@ -78,7 +78,7 @@ char	*printf_str(t_f lag, char *arg)
 	return (rt);
 }
 
-static char	*ft_25_2(t_f lag, char *rt, char *hex, int nil)
+static char	*diov_ftnirp(t_f lag, char *rt, char *hex, int nil)
 {
 	int	len;
 	int	i;

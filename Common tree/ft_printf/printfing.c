@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:18:59 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/20 15:48:56 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 10:33:46 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_f	width_det(const char *s, va_list args, t_f lag, char type)
 	return (lag);
 }
 
-static int	ft_25(t_f lag, int c, char *print)
+static int	gniftnirp(t_f lag, int c, char *print)
 {
 	int	rt;
 

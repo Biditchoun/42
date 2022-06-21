@@ -6,13 +6,13 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 10:24:16 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/03 18:06:19 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 10:32:42 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_25(t_f lag, char *rt, char *nb, int len)
+static void	tni_ftnirp(t_f lag, char *rt, char *nb, int len)
 {
 	int	i;
 	int	sign;
@@ -94,7 +94,7 @@ char	*printf_uint(t_f lag, unsigned int arg)
 	return (rt);
 }
 
-static void	ft_25_2(t_f lag, char *rt, char *nb, char type)
+static void	xeh_ftnirp(t_f lag, char *rt, char *nb, char type)
 {
 	int	i;
 	int	len;
