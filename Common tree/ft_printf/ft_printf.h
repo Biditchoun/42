@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:30:47 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/20 15:30:24 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:49:25 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*printf_uint(t_f lag, unsigned int arg);
 char	*printf_hex(t_f lag, unsigned int arg, char type);
 
 int		printfill(char *str, char c, int n);
-char	*printfree(char *s);
+char	*printfree(char *s, char *rt);
+int		printfreez(int *a, int rt);
 
 #endif

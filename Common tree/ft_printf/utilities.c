@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 23:41:24 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/20 15:15:32 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:27:44 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@ int	printfill(char *str, char c, int n)
 	return (n);
 }
 
-char	*printfree(char *s)
+char	*printfree(char *s, char *rt)
 {
 	free(s);
-	return (NULL);
+	return (rt);
+}
+
+int	printfreez(int *a, int rt)
+{
+	free (a);
+	return (rt);
 }

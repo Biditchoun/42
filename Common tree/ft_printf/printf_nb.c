@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 10:24:16 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/21 10:32:42 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:28:30 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*printf_int(t_f lag, int arg)
 	nb = ft_itoa((long)arg);
 	if (!nb)
 		return (NULL);
+	if (!arg && lag.point && !lag.pwidth)
+		nb[0] = 0;
 	len = ft_strlen(nb);
 	sign = 0;
 	if ((lag.plus || lag.space) && arg > -1)
@@ -60,10 +62,9 @@ char	*printf_int(t_f lag, int arg)
 	lag.width = ft_max(lag.width, lag.pwidth + sign);
 	rt = malloc(sizeof(char) * (ft_max(lag.width, len + sign) + 1));
 	if (!rt)
-		return (printfree(nb));
-	ft_25(lag, rt, nb, len);
-	free(nb);
-	return (rt);
+		return (printfree(nb, NULL));
+	tni_ftnirp(lag, rt, nb, len);
+	return (printfree(nb, rt));
 }
 
 char	*printf_uint(t_f lag, unsigned int arg)
@@ -76,11 +77,13 @@ char	*printf_uint(t_f lag, unsigned int arg)
 	nb = ft_itoa((long)arg);
 	if (!nb)
 		return (NULL);
+	if (!arg && lag.point && !lag.pwidth)
+		nb[0] = 0;
 	len = ft_strlen(nb);
 	lag.width = ft_max(lag.width, lag.pwidth);
 	rt = malloc(sizeof(char) * (ft_max(lag.width, len) + 1));
 	if (!rt)
-		return (printfree(nb));
+		return (printfree(nb, NULL));
 	i = 0;
 	if (!lag.minus && (lag.point || !lag.zero))
 		i += printfill(rt, ' ', lag.width - ft_max(len, lag.pwidth));
@@ -90,8 +93,7 @@ char	*printf_uint(t_f lag, unsigned int arg)
 	i += ft_strlcpy(&rt[i], nb, len + 1);
 	if (lag.minus)
 		i += printfill(&rt[i], ' ', lag.width - ft_max(len, lag.pwidth));
-	free(nb);
-	return (rt);
+	return (printfree(nb, rt));
 }
 
 static void	xeh_ftnirp(t_f lag, char *rt, char *nb, char type)
@@ -129,6 +131,8 @@ char	*printf_hex(t_f lag, unsigned int arg, char type)
 	nb = ft_hex_conv(arg);
 	if (!nb)
 		return (NULL);
+	if (!arg && lag.point && !lag.pwidth)
+		nb[0] = 0;
 	if (type == 'X')
 		nb = ft_str_toupper(nb);
 	len = ft_strlen(nb);
@@ -138,8 +142,7 @@ char	*printf_hex(t_f lag, unsigned int arg, char type)
 	lag.width = ft_max(lag.pwidth + ox, lag.width);
 	rt = malloc(sizeof(char) * (ft_max(lag.width, len + ox) + 1));
 	if (!rt)
-		return (printfree(nb));
-	ft_25_2(lag, rt, nb, type);
-	free(nb);
-	return (rt);
+		return (printfree(nb, NULL));
+	xeh_ftnirp(lag, rt, nb, type);
+	return (printfree(nb, rt));
 }

@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:58:23 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/21 19:29:22 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:48:50 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ static char	*diov_ftnirp(t_f lag, char *rt, char *hex, int len)
 	i = 0;
 	if (!lag.minus && (lag.point || !lag.zero))
 		i += printfill(rt, ' ', lag.width - ft_max(lag.pwidth, len) - 2);
-	i += ft_strlcpy(rt + i, "0x", 3) + printfill(rt + i + 2, '0', lag.pwidth - len);
+	i += ft_strlcpy(rt + i, "0x", 3);
+	i += printfill(rt + i, '0', lag.pwidth - len);
 	if (!lag.minus && !lag.point && lag.zero)
 		i += printfill(&rt[i], '0', lag.width - ft_max(lag.pwidth, len) - 2);
 	i += ft_strlcpy(&rt[i], hex, len + 1);

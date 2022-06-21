@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:18:59 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/21 10:33:46 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:49:16 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ int	printfing(const char *s, va_list args, t_f lag, char type)
 		print = printf_hex(lag, va_arg(args, unsigned int), type);
 	else
 		print = printf_char(lag, type);
-	return (ft_25(lag, c, print));
+	return (gniftnirp(lag, c, print));
 }

@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:02:17 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/21 10:36:15 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:47:36 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,15 @@ static int	*parsing(const char *s, va_list args)
 		return (NULL);
 	flags = "0123456789-+# .*";
 	i = 1;
-	while (ft_strchr(flags, s[i]))
+	while (ft_strchr(flags, s[i]) && s[i])
 		i++;
 	type = s[i];
 	parsrt[0] = i;
 	lag = flags_addresses(s, i);
-	if (!s[1])
-		return (0);
-	parsrt[1] = printfing(&s[1], args, lag, type);
+	if (!s[i])
+		parsrt[1] = -2;
+	else
+		parsrt[1] = printfing(&s[1], args, lag, type) - 1;
 	return (parsrt);
 }
 
@@ -90,12 +91,11 @@ static int	ftnirp_tf(const char *s, va_list args)
 		{
 			parsrt = parsing(&s[i - 1], args);
 			if (!parsrt)
-			{
-				write(1, "\nA malloc failed", 16);
 				break ;
-			}
 			i += parsrt[0];
-			rt += parsrt[1] - 1;
+			rt += parsrt[1];
+			if (parsrt[1] < -1)
+				return (printfreez(parsrt, rt + 1));
 			free(parsrt);
 		}
 		rt++;
@@ -111,7 +111,7 @@ int	ft_printf(const char *s, ...)
 	if (!s)
 		return (0);
 	va_start(args, s);
-	rt = ftnirp_ft(s, args);
+	rt = ftnirp_tf(s, args);
 	va_end(args);
 	return (rt);
 }
