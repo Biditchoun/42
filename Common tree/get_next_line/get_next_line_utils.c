@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:40:51 by swijnber          #+#    #+#             */
-/*   Updated: 2022/08/23 17:51:26 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:37:24 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,24 @@ char	*ft_calloc(size_t nmemb, size_t size)
 	return (rt);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strndup(const char *s, int n)
 {
 	char	*rt;
 	int		i;
 
-	rt = malloc((ft_strlen(s) + 1) * sizeof (const char));
+	if (n < 0)
+		n = ft_strlen(s);
+	rt = malloc((n + 1) * sizeof (const char));
 	if (!rt)
 		return (NULL);
 	i = -1;
-	while (s[++i])
+	while (s[++i] && i < n)
 		rt[i] = s[i];
 	rt[i] = 0;
 	return (rt);
 }
 
-char	*ft_strjoinf(char const *s1, char const *s2, int sz)
+char	*ft_strjoinfree(char const *s1, char const *s2, int sz)
 {
 	char	*rt;
 	int		i;

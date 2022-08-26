@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:49:14 by swijnber          #+#    #+#             */
-/*   Updated: 2022/08/23 17:51:23 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:37:27 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,23 @@ char	*get_next_line(int fd)
 	char		*rt;
 	int			i;
 
+	if (BUFFER_SIZE < 1)
+		return (NULL);
+	i = 0;
+	while (line && line[i] && line[i] != '\n')
+		i++;
+	if (line && line[i] == '\n')
+	{
+		rt = ft_strndup(line, i);
+		if (!rt)
+			return (NULL);
+		buff = ft_strndup(&line[++i], -1);
+		if (!buff)
+			return (ft_free(rt));
+		free(line);
+		line = buff;
+		return (rt);
+	}
 	i = BUFFER_SIZE;
 	buff = ft_calloc(BUFFER_SIZE + 1, 1);
 	if (!buff)
@@ -32,10 +49,10 @@ char	*get_next_line(int fd)
 			i++;
 		if (buff[i] == '\n')
 			i++;
-		line = ft_strjoinf(line, buff, i);
+		line = ft_strjoinfree(line, buff, i);
 	}
 	rt = line;
-	line = ft_strdup(&buff[i]);
+	line = ft_strndup(&buff[i], -1);
 	free((void *)buff);
 	if (!line)
 		return (NULL);
