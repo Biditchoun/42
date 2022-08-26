@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:49:14 by swijnber          #+#    #+#             */
-/*   Updated: 2022/08/26 18:37:27 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:42:18 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ char	*get_next_line(int fd)
 		i++;
 	if (line && line[i] == '\n')
 	{
-		rt = ft_strndup(line, i);
+		rt = ft_strndup(line, ++i);
 		if (!rt)
 			return (NULL);
-		buff = ft_strndup(&line[++i], -1);
+		buff = ft_strndup(&line[i], -1);
 		if (!buff)
 			return (ft_free(rt));
 		free(line);
