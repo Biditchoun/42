@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:22:17 by swijnber          #+#    #+#             */
-/*   Updated: 2022/08/26 17:45:58 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/09/02 03:26:26 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main()
 	while (i)
 	{
 		line = get_next_line(fd);
-		printf("Main : %s", line);
+		printf("Main : %s\n", line);
 		if (!line)
 			i = 0;
 		free(line);
