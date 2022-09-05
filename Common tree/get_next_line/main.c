@@ -6,42 +6,32 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:22:17 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/02 03:26:26 by swijnber         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/08 14:26:22 by swijnber          #+#    #+#             */
-/*   Updated: 2022/08/22 16:22:12 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/09/05 05:31:25 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <fcntl.h>
 #include "get_next_line.h"
-
+#include <stdio.h>
 int	main()
 {
-	int	fd;
+	int	fd, fd2;
 	int i;
-	char *line;
+	char *text;
 
 	fd = open("text", O_RDONLY);
-	i = 1;
+	fd2 = open("text2", O_RDONLY);
+	i = -2;
 	while (i)
 	{
-		line = get_next_line(fd);
-		printf("Main : %s\n", line);
-		if (!line)
+		text = get_next_line(fd);
+		printf("Main: %s", text);
+		if (!text)
 			i = 0;
-		free(line);
+		free(text);
 	}
 	close(fd);
+	close(fd2);
 	return (0);
 }
