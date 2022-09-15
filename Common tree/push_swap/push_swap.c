@@ -4,7 +4,7 @@ static int	error_rt(int argc)
 {
 	if (argc < 2)
 		return (-1);
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	return (-1);
 }
 

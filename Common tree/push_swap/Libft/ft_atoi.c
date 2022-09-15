@@ -16,9 +16,8 @@ static int	weird_shit(int m, unsigned long long nb, int p)
 {
 	long long	nba;
 
-	if (!m && (nb > 9223372036854775807 || p > 18))
-		return (-1);
-	else if (m && (nb > 9223372036854775807 || p > 18))
+	if (nb > 9223372036854775807 || p > 18 || (nb > INT_MAX && !m)
+		|| (nb > (unsigned int)INT_MAX + 1 && m))
 		return (0);
 	nba = nb;
 	if (m)

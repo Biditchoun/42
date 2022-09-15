@@ -19,20 +19,34 @@ static int	params_checking(int argc, char **argv)
 	return (0);
 }
 
-int	*init_stack(int argc, char **argv)
+static int	*fill_stack(char **argv, int *a)
 {
-	int	*a;
 	int	i;
 	int	j;
 
-	if (params_checking(argc, argv))
-		return (NULL);
-	a = malloc(sizeof(int) * argc);
-	if (!a)
-		return (NULL);
-	i = -1;
-	while (argv[++i + 1])
-		a[i] = ft_atoi(argv[i + 1]);
+	i = 0;
+	while (argv[++i])
+	{
+		if (!argv[i][0])
+			return (ft_free((void *)a, NULL));
+		a[i - 1] = ft_atoi(argv[i]);
+		if (!a[i - 1])
+		{
+			j = 0;
+			while (argv[i][j] == '0')
+				j++;
+			if (argv[i][j])
+				return (ft_free((void *)a, NULL));
+		}
+	}
+	return (a);
+}
+
+static int	*check_duplicate(int argc, int *a)
+{
+	int	i;
+	int	j;
+
 	i = -1;
 	while (++i < argc)
 	{
@@ -41,5 +55,21 @@ int	*init_stack(int argc, char **argv)
 			if (a[i] == a[j])
 				return (ft_free((void *)a, NULL));
 	}
+	return (a);
+}
+
+int	*init_stack(int argc, char **argv)
+{
+	int	*a;
+
+	if (params_checking(argc, argv))
+		return (NULL);
+	a = malloc(sizeof(int) * argc--);
+	if (!a)
+		return (NULL);
+	a = fill_stack(argv, a);
+	if (!a)
+		return (NULL);
+	a = check_duplicate(argc, a);
 	return (a);
 }

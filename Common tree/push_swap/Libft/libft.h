@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <limits.h>
 
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
