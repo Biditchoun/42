@@ -1,5 +1,6 @@
 SRCS		=	push_swap.c\
 				init_stack.c\
+				assign_sorting.c
 				
 OBJS		=	${SRCS:.c=.o}
 NAME		=	push_swap.a

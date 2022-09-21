@@ -64,12 +64,12 @@ int	*init_stack(int argc, char **argv)
 
 	if (params_checking(argc, argv))
 		return (NULL);
-	a = malloc(sizeof(int) * argc--);
+	a = malloc(sizeof(int) * argc);
 	if (!a)
 		return (NULL);
 	a = fill_stack(argv, a);
 	if (!a)
 		return (NULL);
-	a = check_duplicate(argc, a);
+	a = check_duplicate(argc - 1, a);
 	return (a);
 }
