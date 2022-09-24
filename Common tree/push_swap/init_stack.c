@@ -58,7 +58,7 @@ static int	*check_duplicate(int argc, int *a)
 	return (a);
 }
 
-int	*init_stack(int argc, char **argv)
+int	*init_stack_a(int argc, char **argv)
 {
 	int	*a;
 
