@@ -1,21 +1,24 @@
 #include "push_swap.h"
 
-void	shift_down(int *a, int *a_)
+int	shift_down(int *a, int *a_)
 {
 	int	i;
+	int	rt;
 
 	i = 0;
 	while (a_[i] > 0)
 		i++;
+	rt = i;
 	while (i)
 	{
 		a[i] = a[i - 1];
 		a_[i] = a_[i - 1];
 		i--;
 	}
+	return (rt);
 }
 
-void	shift_up(int *a, int *a_)
+int	shift_up(int *a, int *a_)
 {
 	int	i;
 
@@ -27,4 +30,5 @@ void	shift_up(int *a, int *a_)
 	}
 	a[--i] = INT_MAX;
 	a_[i] = a_[i + 1];
+	return (i);
 }

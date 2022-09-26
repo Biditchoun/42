@@ -1,11 +1,10 @@
 #include "push_swap.h"
 
-static void	swapping (int *a, int *a_, int argc)
+static void	swapping (int *a, int *a_)
 {
 	int	buf;
 	
-	if ((a[0] == INT_MAX && a_[0] != argc) || (a[1] == INT_MAX && a_[1] != argc)
-			|| (!a_[argc] && (a[0] == INT_MAX || a[1] == INT_MAX)))
+	if ((a[0] < 1 || a[1] < 1))
 			return ;
 	buf = a[0];
 	a[0] = a[1];
@@ -15,13 +14,12 @@ static void	swapping (int *a, int *a_, int argc)
 	a_[1] = buf;
 }
 
-void	swap(t_stacks stacks, int argc, char which)
+void	swap(t_stacks stacks, char which)
 {
-	argc--;
 	if (which == 'a')
-		swapping(stacks.a, stacks.a_, argc);
+		swapping(stacks.a, stacks.a_);
 	else if (which == 'b')
-		swapping(stacks.b, stacks.b_, argc);
+		swapping(stacks.b, stacks.b_);
 }
 
 static void	pushing(int *a, int *a_, int *b, int *b_)
@@ -37,7 +35,7 @@ static void	pushing(int *a, int *a_, int *b, int *b_)
 void	push(t_stacks stacks, char which)
 {
 	if (which == 'a')
-		pushing(stacks.a, stacks.a_, stacks.b, stacks.b_);
-	else if (which == 'b')
 		pushing(stacks.b, stacks.b_, stacks.a, stacks.a_);
+	else if (which == 'b')
+		pushing(stacks.a, stacks.a_, stacks.b, stacks.b_);
 }
