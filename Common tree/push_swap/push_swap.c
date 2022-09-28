@@ -5,7 +5,8 @@ static int	error_rt(t_stacks stacks, int argc)
 	if (argc < 2)
 		return (-1);
 	write(2, "Error\n", 6);
-	freestacks(stacks);
+	if (stacks.a)
+		freestacks(stacks);
 	return (-1);
 }
 
@@ -26,41 +27,6 @@ int	main(int argc, char **argv)
 	if (!stacks.b_)
 		return (error_rt(stacks, argc));
 	algorithms_hq(stacks, argc);
-
-/*
-	printstacks(stacks, argc);
-
-	ft_printf("Push a\n");
-	push(stacks, 'a');
-	printstacks(stacks, argc);
-
-	ft_printf("Push b\n");
-	push(stacks, 'b');
-	printstacks(stacks, argc);
-
-	ft_printf("Rotate a\n");
-	rotate(stacks, 'a');
-	printstacks(stacks, argc);
-	
-	ft_printf("Push b\n");
-	push(stacks, 'b');
-	printstacks(stacks, argc);
-
-	ft_printf("Rrotate a\n");
-	rotate(stacks, 'a');
-	printstacks(stacks, argc);
-
-	ft_printf("Swap b\n");
-	swap(stacks, 'b');
-	printstacks(stacks, argc);
-
-	ft_printf("Push a\n");
-	push(stacks, 'a');
-	printstacks(stacks, argc);
-	
-	ft_printf("Push a\n");
-	push(stacks, 'a');
-	printstacks(stacks, argc);*/
 
 	return (0);
 }

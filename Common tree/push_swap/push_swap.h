@@ -27,6 +27,7 @@ int			shift_up(int *a, int *a_);
 void		algorithms_hq(t_stacks stacks, int argc);
 t_stacks	sbuf_init(t_stacks stacks, int argc);
 void		*freestacks(t_stacks stacks);
+int			arrchr(int *a, int n);
 int			algo_1(t_stacks stacks, int argc);
 void		walgo_1(t_stacks stacks, int argc);
 

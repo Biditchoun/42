@@ -68,3 +68,13 @@ int	shift_up(int *a, int *a_)
 	a_[i] = a_[i + 1];
 	return (i);
 }
+
+int	arrchr(int *a, int n)
+{
+	int	i;
+
+	i = 0;
+	while (a[i] != n)
+		i++;
+	return (i);
+}

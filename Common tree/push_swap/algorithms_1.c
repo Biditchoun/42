@@ -7,13 +7,23 @@ void	walgo_1(t_stacks stacks, int argc)
 
 	printstacks(stacks, argc);
 	i = 1;
-	while (stacks.a_[0] > 0)
+	while (stacks.a_[1] > 0)
 	{
 		count = 0;
-		while (stacks.a_[0] != i)
-			count += rotate(stacks, 'a');
-		while (count--)
-			ft_printf("ra\n");
+		if (arrchr(stacks.a_, i) < argc / 2)
+		{
+			while (stacks.a_[0] != i)
+				count += rotate(stacks, 'a');
+			while (count--)
+				ft_printf("ra\n");
+		}
+		else
+		{
+			while (stacks.a_[0] != i)
+				count += rrotate(stacks, 'a');
+			while (count--)
+				ft_printf("rra\n");
+		}
 		printstacks(stacks, argc);
 		push(stacks, 'b');
 		ft_printf("pb\n");
@@ -39,10 +49,15 @@ int	algo_1(t_stacks stacks, int argc)
 		return (-1);
 	count = 0;
 	i = 1;
-	while (sbuf.a_[0] > 0)
+	while (sbuf.a_[1] > 0)
 	{
-		while (sbuf.a_[0] != i)
-			count += rotate(sbuf, 'a');
+		ft_printf("Oui : %i, %i\n", arrchr(sbuf.a_, i), argc);
+		if (arrchr(sbuf.a_, i) < argc / 2)
+			while (sbuf.a_[0] != i)
+				count += rotate(sbuf, 'a');
+		else
+			while (sbuf.a_[0] != i)
+				count += rrotate(sbuf, 'a');
 		count += push(sbuf, 'b');
 		i++;
 	}
@@ -50,4 +65,4 @@ int	algo_1(t_stacks stacks, int argc)
 		count += push(sbuf, 'a');
 	freestacks(sbuf);
 	return (count);
-	}
+}
