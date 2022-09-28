@@ -11,17 +11,25 @@ typedef struct s_tacks
 	int	*b_;
 }	t_stacks;
 
-int		main(int argc, char **argv);
-int		*init_stack_a(int argc, char **argv);
-int		*init_stack_a_(int *a, int argc);
-int		*init_stack_b(int argc);
-int		*init_stack_b_(int *a_, int argc);
+int			main(int argc, char **argv);
+int			*init_stack_a(int argc, char **argv);
+int			*init_stack_a_(int *a, int argc);
+int			*init_stack_b(int argc);
+int			*init_stack_b_(int *a_, int argc);
 
-void	swap(t_stacks stacks, char which);
-void	push(t_stacks stacks, char which);
-void	rotate(t_stacks stacks, char which);
-void	rrotate(t_stacks stacks, char which);
-int		shift_down(int *a, int *a_);
-int		shift_up(int *a, int *a_);
+int			swap(t_stacks stacks, char which);
+int			push(t_stacks stacks, char which);
+int			rotate(t_stacks stacks, char which);
+int			rrotate(t_stacks stacks, char which);
+int			shift_down(int *a, int *a_);
+int			shift_up(int *a, int *a_);
+
+void		algorithms_hq(t_stacks stacks, int argc);
+t_stacks	sbuf_init(t_stacks stacks, int argc);
+void		*freestacks(t_stacks stacks);
+int			algo_1(t_stacks stacks, int argc);
+void		walgo_1(t_stacks stacks, int argc);
+
+void	printstacks(t_stacks stacks, int argc);
 
 #endif

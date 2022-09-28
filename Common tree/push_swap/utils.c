@@ -1,5 +1,41 @@
 #include "push_swap.h"
 
+void	printstacks(t_stacks stacks, int argc)
+{
+	int i;
+
+	i = 0;
+	ft_printf("Stack a:\n");
+	while (i < argc - 1)
+		ft_printf("%i ", stacks.a[i++]);
+	ft_printf("\n");
+	i = 0;
+	while (i < argc)
+		ft_printf("%i ", stacks.a_[i++]);
+	ft_printf("\nStack b:\n");
+	i = 0;
+	while (i < argc - 1)
+		ft_printf("%i ", stacks.b[i++]);
+	ft_printf("\n");
+	i = 0;
+	while (i < argc)
+		ft_printf("%i ", stacks.b_[i++]);
+	ft_printf("\n\n");
+}
+
+void	*freestacks(t_stacks stacks)
+{
+	if (stacks.a)
+		free(stacks.a);
+	if (stacks.a_)
+		free(stacks.a_);
+	if (stacks.b)
+		free(stacks.b);
+	if (stacks.b_)
+		free(stacks.b_);
+	return (NULL);
+}
+
 int	shift_down(int *a, int *a_)
 {
 	int	i;

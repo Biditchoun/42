@@ -14,12 +14,13 @@ static void	swapping (int *a, int *a_)
 	a_[1] = buf;
 }
 
-void	swap(t_stacks stacks, char which)
+int	swap(t_stacks stacks, char which)
 {
 	if (which == 'a')
 		swapping(stacks.a, stacks.a_);
 	else if (which == 'b')
 		swapping(stacks.b, stacks.b_);
+	return (1);
 }
 
 static void	pushing(int *a, int *a_, int *b, int *b_)
@@ -32,10 +33,11 @@ static void	pushing(int *a, int *a_, int *b, int *b_)
 	shift_up(a, a_);
 }
 
-void	push(t_stacks stacks, char which)
+int	push(t_stacks stacks, char which)
 {
 	if (which == 'a')
 		pushing(stacks.b, stacks.b_, stacks.a, stacks.a_);
 	else if (which == 'b')
 		pushing(stacks.a, stacks.a_, stacks.b, stacks.b_);
+	return (1);
 }

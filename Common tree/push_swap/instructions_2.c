@@ -15,12 +15,13 @@ static void	rotating(int *a, int *a_)
 	a_[i] = buf_;
 }
 
-void	rotate(t_stacks stacks, char which)
+int	rotate(t_stacks stacks, char which)
 {
 	if (which == 'a')
 		rotating(stacks.a, stacks.a_);
 	else if (which == 'b')
 		rotating(stacks.b, stacks.b_);
+	return (1);
 }
 
 static void	rrotating(int *a, int *a_)
@@ -41,10 +42,11 @@ static void	rrotating(int *a, int *a_)
 	a_[i] = buf;
 }
 
-void	rrotate(t_stacks stacks, char which)
+int	rrotate(t_stacks stacks, char which)
 {
 	if (which == 'a')
 		rrotating(stacks.a, stacks.a_);
 	else if (which == 'b')
 		rrotating(stacks.b, stacks.b_);
+	return (1);
 }

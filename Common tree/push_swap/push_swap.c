@@ -5,14 +5,7 @@ static int	error_rt(t_stacks stacks, int argc)
 	if (argc < 2)
 		return (-1);
 	write(2, "Error\n", 6);
-	if (stacks.a)
-		free(stacks.a);
-	if (stacks.b)
-		free(stacks.b);
-	if (stacks.a_)
-		free(stacks.a_);
-	if (stacks.b_)
-		free(stacks.b_);
+	freestacks(stacks);
 	return (-1);
 }
 
@@ -32,176 +25,42 @@ int	main(int argc, char **argv)
 	stacks.b_ = init_stack_b_(stacks.a_, argc);
 	if (!stacks.b_)
 		return (error_rt(stacks, argc));
+	algorithms_hq(stacks, argc);
 
-	int i;
-	i = 0;
-	ft_printf("Stack a:\n");
-	while (i < argc)
-		ft_printf("%i ", stacks.a[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.a_[i++]);
-	ft_printf("\nStack b:\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b_[i++]);
-	ft_printf("\n\nPush a\n");
+/*
+	printstacks(stacks, argc);
 
+	ft_printf("Push a\n");
 	push(stacks, 'a');
-	i = 0;
-	ft_printf("Stack a:\n");
-	while (i < argc)
-		ft_printf("%i ", stacks.a[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.a_[i++]);
-	ft_printf("\nStack b:\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b_[i++]);
-	ft_printf("\n\nPush b\n");
+	printstacks(stacks, argc);
 
+	ft_printf("Push b\n");
 	push(stacks, 'b');
-	i = 0;
-	ft_printf("Stack a:\n");
-	while (i < argc)
-		ft_printf("%i ", stacks.a[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.a_[i++]);
-	ft_printf("\nStack b:\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b_[i++]);
-	ft_printf("\n\nRotate a\n");
+	printstacks(stacks, argc);
 
+	ft_printf("Rotate a\n");
 	rotate(stacks, 'a');
-	i = 0;
-	ft_printf("Stack a:\n");
-	while (i < argc)
-		ft_printf("%i ", stacks.a[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.a_[i++]);
-	ft_printf("\nStack b:\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b_[i++]);
-	ft_printf("\n\nPush b\n");
+	printstacks(stacks, argc);
 	
+	ft_printf("Push b\n");
 	push(stacks, 'b');
-	i = 0;
-	ft_printf("Stack a:\n");
-	while (i < argc)
-		ft_printf("%i ", stacks.a[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.a_[i++]);
-	ft_printf("\nStack b:\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b_[i++]);
-	ft_printf("\n\nRrotate a\n");
-	
-	rrotate(stacks, 'a');
-	i = 0;
-	ft_printf("Stack a:\n");
-	while (i < argc)
-		ft_printf("%i ", stacks.a[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.a_[i++]);
-	ft_printf("\nStack b:\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b_[i++]);
-	ft_printf("\n\nSwap b\n");
-	
+	printstacks(stacks, argc);
+
+	ft_printf("Rrotate a\n");
+	rotate(stacks, 'a');
+	printstacks(stacks, argc);
+
+	ft_printf("Swap b\n");
 	swap(stacks, 'b');
-	i = 0;
-	ft_printf("Stack a:\n");
-	while (i < argc)
-		ft_printf("%i ", stacks.a[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.a_[i++]);
-	ft_printf("\nStack b:\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b_[i++]);
-	ft_printf("\n\nPush a\n");
+	printstacks(stacks, argc);
+
+	ft_printf("Push a\n");
+	push(stacks, 'a');
+	printstacks(stacks, argc);
 	
+	ft_printf("Push a\n");
 	push(stacks, 'a');
-	i = 0;
-	ft_printf("Stack a:\n");
-	while (i < argc)
-		ft_printf("%i ", stacks.a[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.a_[i++]);
-	ft_printf("\nStack b:\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b_[i++]);
-	ft_printf("\n\nPush a\n");
-		
-	push(stacks, 'a');
-	i = 0;
-	ft_printf("Stack a:\n");
-	while (i < argc)
-		ft_printf("%i ", stacks.a[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.a_[i++]);
-	ft_printf("\nStack b:\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b[i++]);
-	ft_printf("\n");
-	i = 0;
-	while (i < argc)
-		ft_printf("%i ", stacks.b_[i++]);
-	ft_printf("\n\n");
+	printstacks(stacks, argc);*/
+
 	return (0);
 }
