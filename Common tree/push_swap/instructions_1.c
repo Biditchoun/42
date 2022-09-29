@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instructions_1.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 18:12:47 by swijnber          #+#    #+#             */
+/*   Updated: 2022/09/29 18:57:37 by swijnber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void	swapping (int *a, int *a_)
+static void	swapping(int *a, int *a_)
 {
 	int	buf;
-	
+
 	if ((a[0] < 1 || a[1] < 1))
-			return ;
+		return ;
 	buf = a[0];
 	a[0] = a[1];
 	a[1] = buf;
@@ -20,6 +32,7 @@ int	swap(t_stacks stacks, char which)
 		swapping(stacks.a, stacks.a_);
 	else if (which == 'b')
 		swapping(stacks.b, stacks.b_);
+	ft_printf("s%c\n", which);
 	return (1);
 }
 
@@ -39,5 +52,6 @@ int	push(t_stacks stacks, char which)
 		pushing(stacks.b, stacks.b_, stacks.a, stacks.a_);
 	else if (which == 'b')
 		pushing(stacks.a, stacks.a_, stacks.b, stacks.b_);
+	ft_printf("p%c\n", which);	
 	return (1);
 }

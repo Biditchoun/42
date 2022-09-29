@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 18:14:45 by swijnber          #+#    #+#             */
+/*   Updated: 2022/09/29 18:14:53 by swijnber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	error_rt(t_stacks stacks, int argc)
@@ -27,6 +39,5 @@ int	main(int argc, char **argv)
 	if (!stacks.b_)
 		return (error_rt(stacks, argc));
 	algorithms_hq(stacks, argc);
-
 	return (0);
 }

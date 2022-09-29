@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 18:15:08 by swijnber          #+#    #+#             */
+/*   Updated: 2022/09/29 19:01:54 by swijnber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -31,6 +43,6 @@ int			arrchr(int *a, int n);
 int			algo_1(t_stacks stacks, int argc);
 void		walgo_1(t_stacks stacks, int argc);
 
-void	printstacks(t_stacks stacks, int argc);
+void		printstacks(t_stacks stacks, int argc);
 
 #endif

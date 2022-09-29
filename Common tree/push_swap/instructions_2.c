@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instructions_2.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 18:13:44 by swijnber          #+#    #+#             */
+/*   Updated: 2022/09/29 18:57:16 by swijnber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	rotating(int *a, int *a_)
@@ -21,13 +33,14 @@ int	rotate(t_stacks stacks, char which)
 		rotating(stacks.a, stacks.a_);
 	else if (which == 'b')
 		rotating(stacks.b, stacks.b_);
+	ft_printf("r%c\n", which);
 	return (1);
 }
 
 static void	rrotating(int *a, int *a_)
 {
-	int i;
-	int buf;
+	int	i;
+	int	buf;
 
 	if (a_[0] < 1 || a_[1] < 1)
 		return ;
@@ -48,5 +61,6 @@ int	rrotate(t_stacks stacks, char which)
 		rrotating(stacks.a, stacks.a_);
 	else if (which == 'b')
 		rrotating(stacks.b, stacks.b_);
+	ft_printf("rr%c\n", which);
 	return (1);
 }

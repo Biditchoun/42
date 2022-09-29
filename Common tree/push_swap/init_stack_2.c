@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_stack_2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 18:12:29 by swijnber          #+#    #+#             */
+/*   Updated: 2022/09/29 18:17:15 by swijnber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	min_in_stack(int *buf, int argc)
@@ -61,7 +73,7 @@ int	*init_stack_a_(int *a, int argc)
 	{
 		i = min_in_stack(buf, argc);
 		if (i == INT_MAX)
-			break;
+			break ;
 		a_[i] = count++;
 		buf[i] = INT_MAX;
 	}
