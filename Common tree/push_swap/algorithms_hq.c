@@ -6,11 +6,34 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:11:53 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/29 18:59:42 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:13:32 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	give_instructions(t_stacks stacks, int orders_count, ...)
+{
+	va_list	orders;
+	char	*order;
+	int		i;
+
+	va_start(orders, orders_count);
+	i = 0;
+	while (i++ < orders_count)
+	{
+		order = va_arg(orders, char *);
+		if (order[0] == 's')
+			swap(stacks, order[1]);
+		else if (order[0] == 'p')
+			push(stacks, order[1]);
+		else if (order[0] == 'r')
+			rotate(stacks, order[1]);
+		else if (order[0] == 'o')
+			rrotate(stacks, order[1]);
+	}
+	va_end(orders);
+}
 
 t_stacks	sbuf_init(t_stacks stacks, int argc)
 {
@@ -25,32 +48,12 @@ t_stacks	sbuf_init(t_stacks stacks, int argc)
 	return (sbuf);
 }
 
-static void	argc_four(t_stacks stacks, int argc)
-{
-	argc--;
-	if (stacks.a_[0] == argc)
-		rotate(stacks, 'a');
-	else if (stacks.a_[1] == argc && argc == 3)
-		rrotate(stacks, 'a');
-	if (stacks.a_[0] != 1)
-		swap(stacks, 'a');
-}
-
 void	algorithms_hq(t_stacks stacks, int argc)
 {
-	void	(*algo_ptr)(t_stacks, int);
-	int		algo_count[2];
-	//int		buf;
-
 	if (argc < 5)
-		argc_four(stacks, argc);
-	else
-	{algo_ptr = walgo_1;
-	algo_count[1] = algo_1(stacks, argc);
-	ft_printf("\nCount : %i\n\n", algo_count[1]);
-	algo_ptr(stacks, argc);
-	//buf = algo_2(stacks, argc);
-	}
+		algo_1(stacks, argc);
+	else if (argc == 5)
+		algo_2(stacks, argc);
 	printstacks(stacks, argc);
 	freestacks(stacks);
 }

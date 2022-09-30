@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:12:47 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/29 18:57:37 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:57:06 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int	swap(t_stacks stacks, char which)
 		swapping(stacks.a, stacks.a_);
 	else if (which == 'b')
 		swapping(stacks.b, stacks.b_);
+	else if (which == 's')
+	{
+		swapping(stacks.a, stacks.a_);
+		swapping(stacks.a, stacks.a_);
+	}
 	ft_printf("s%c\n", which);
 	return (1);
 }

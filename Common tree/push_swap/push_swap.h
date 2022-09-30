@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:15:08 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/29 19:01:54 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:13:30 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ void		algorithms_hq(t_stacks stacks, int argc);
 t_stacks	sbuf_init(t_stacks stacks, int argc);
 void		*freestacks(t_stacks stacks);
 int			arrchr(int *a, int n);
-int			algo_1(t_stacks stacks, int argc);
-void		walgo_1(t_stacks stacks, int argc);
+void		give_instructions(t_stacks stacks, int orders_count, ...);
+void		algo_1(t_stacks stacks, int argc);
+void		algo_2(t_stacks stacks, int argc);
 
 void		printstacks(t_stacks stacks, int argc);
 

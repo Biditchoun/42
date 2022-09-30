@@ -6,75 +6,66 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:11:41 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/29 18:11:44 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:54:36 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	walgo_1(t_stacks stacks, int argc)
+void	algo_1(t_stacks stacks, int argc)
 {
-	int	i;
-	int	count;
-
-	printstacks(stacks, argc);
-	i = 1;
-	while (stacks.a_[1] > 0)
-	{
-		count = 0;
-		if (arrchr(stacks.a_, i) < argc / 2)
-		{
-			while (stacks.a_[0] != i)
-				count += rotate(stacks, 'a');
-			while (count--)
-				ft_printf("ra\n");
-		}
-		else
-		{
-			while (stacks.a_[0] != i)
-				count += rrotate(stacks, 'a');
-			while (count--)
-				ft_printf("rra\n");
-		}
-		printstacks(stacks, argc);
-		push(stacks, 'b');
-		ft_printf("pb\n");
-		printstacks(stacks, argc);
-		i++;
-	}
-	count = 0;
-	while (stacks.b_[0] > 0)
-		count += push(stacks, 'a');
-	while (count--)
-		ft_printf("pa\n");
-	printstacks(stacks, argc);
+	if (argc > 4)
+		return ;
+	argc--;
+	if (stacks.a_[0] == argc)
+		rotate(stacks, 'a');
+	else if (stacks.a_[1] == argc && argc == 3)
+		rrotate(stacks, 'a');
+	if (stacks.a_[0] != 1)
+		swap(stacks, 'a');
 }
 
-int	algo_1(t_stacks stacks, int argc)
+void	algo_2(t_stacks stacks, int argc)
 {
-	t_stacks	sbuf;
-	int			i;
-	int			count;
-
-	sbuf = sbuf_init(stacks, argc);
-	if (!sbuf.a || !sbuf.a_ || !sbuf.b || !sbuf.b_)
-		return (-1);
-	count = 0;
-	i = 1;
-	while (sbuf.a_[1] > 0)
+	if (argc != 5)
+		return ;
+	argc--;
+	if (stacks.a_[0] > stacks.a_[1] && (stacks.a_[0] != 4 || (stacks.a_[0] == 4 && stacks.a_[1] == 3)))
+		swap(stacks, 'a');
+	if (stacks.a_[0] == 3)
 	{
-		ft_printf("Oui : %i, %i\n", arrchr(sbuf.a_, i), argc);
-		if (arrchr(sbuf.a_, i) < argc / 2)
-			while (sbuf.a_[0] != i)
-				count += rotate(sbuf, 'a');
-		else
-			while (sbuf.a_[0] != i)
-				count += rrotate(sbuf, 'a');
-		count += push(sbuf, 'b');
-		i++;
+		if (stacks.a_[1] == 4)
+			give_instructions(stacks, 2, "ra", "ra");
+		else if (stacks.a_[2] == 4)
+			give_instructions(stacks, 2, "sa", "oa");
+		else if (stacks.a_[3] == 4)
+			give_instructions(stacks, 4, "oa", "sa", "ra", "ra");
 	}
-	while (sbuf.b_[0] > 0)
-		count += push(sbuf, 'a');
-	freestacks(sbuf);
-	return (count);
+	else if (stacks.a_[1] == 3)
+	{
+		if (stacks.a_[2] == 4)
+			rrotate(stacks, 'a');
+		else if (stacks.a_[3] == 4)
+			give_instructions(stacks, 3, "ra", "sa", "oa");
+	}
+	else if (stacks.a_[2] == 3)
+	{
+		if (stacks.a_[0] == 4)
+			give_instructions(stacks, 3, "oa", "sa", "ra");
+		else if (stacks.a_[1] == 4 && stacks.a_[0] == 1)
+			give_instructions(stacks, 4, "pb", "sa", "oa", "pa");
+		else if (stacks.a_[1] == 4)
+			give_instructions(stacks, 4, "ra", "sa", "ra", "ra");
+	}
+	else if (stacks.a_[3] == 3)
+	{
+		if (stacks.a_[0] == 4)
+			rotate(stacks, 'a');
+		else if (stacks.a_[1] == 4)
+			give_instructions(stacks, 2, "sa", "ra");
+		else if (stacks.a_[2] == 4)
+			give_instructions(stacks, 4, "pb", "sa", "ra", "pa");
+	}
+	if (stacks.a_[0] != 1)
+		swap(stacks, 'a');
 }

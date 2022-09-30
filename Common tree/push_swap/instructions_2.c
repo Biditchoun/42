@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:13:44 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/29 18:57:16 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:57:43 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	rotate(t_stacks stacks, char which)
 		rotating(stacks.a, stacks.a_);
 	else if (which == 'b')
 		rotating(stacks.b, stacks.b_);
+	else if (which == 'r')
+	{
+		rotating(stacks.a, stacks.a_);
+		rotating(stacks.b, stacks.b_);
+	}
 	ft_printf("r%c\n", which);
 	return (1);
 }
@@ -61,6 +66,11 @@ int	rrotate(t_stacks stacks, char which)
 		rrotating(stacks.a, stacks.a_);
 	else if (which == 'b')
 		rrotating(stacks.b, stacks.b_);
+	else if (which == 'r')
+	{
+		rrotating(stacks.a, stacks.a_);
+		rrotating(stacks.b, stacks.b_);
+	}
 	ft_printf("rr%c\n", which);
 	return (1);
 }
