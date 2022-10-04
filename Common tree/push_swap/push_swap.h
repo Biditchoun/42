@@ -43,6 +43,7 @@ int			arrchr(int *a, int n);
 void		give_instructions(t_stacks stacks, int orders_count, ...);
 void		algo_1(t_stacks stacks, int argc);
 void		algo_2(t_stacks stacks, int argc);
+int			algo_3(t_stacks stacks, int argc);
 
 void		printstacks(t_stacks stacks, int argc);
 

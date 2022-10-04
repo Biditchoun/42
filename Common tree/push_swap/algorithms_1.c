@@ -25,6 +25,36 @@ void	algo_1(t_stacks stacks, int argc)
 		swap(stacks, 'a');
 }
 
+static void	algo_2_1(t_stacks stacks)
+{
+	if (stacks.a_[1] == 4)
+		give_instructions(stacks, 2, "ra", "ra");
+	else if (stacks.a_[2] == 4)
+		give_instructions(stacks, 2, "sa", "oa");
+	else if (stacks.a_[3] == 4)
+		give_instructions(stacks, 4, "oa", "sa", "ra", "ra");
+}
+
+static void	algo_2_2(t_stacks stacks)
+{
+	if (stacks.a_[0] == 4)
+		give_instructions(stacks, 3, "oa", "sa", "ra");
+	else if (stacks.a_[1] == 4 && stacks.a_[0] == 1)
+		give_instructions(stacks, 4, "pb", "sa", "oa", "pa");
+	else if (stacks.a_[1] == 4)
+		give_instructions(stacks, 4, "ra", "sa", "ra", "ra");
+}
+
+static void	algo_2_3(t_stacks stacks)
+{
+	if (stacks.a_[0] == 4)
+		rotate(stacks, 'a');
+	else if (stacks.a_[1] == 4)
+		give_instructions(stacks, 2, "sa", "ra");
+	else if (stacks.a_[2] == 4)
+		give_instructions(stacks, 4, "pb", "sa", "ra", "pa");
+}
+
 void	algo_2(t_stacks stacks, int argc)
 {
 	if (argc != 5)
@@ -33,14 +63,7 @@ void	algo_2(t_stacks stacks, int argc)
 	if (stacks.a_[0] > stacks.a_[1] && (stacks.a_[0] != 4 || (stacks.a_[0] == 4 && stacks.a_[1] == 3)))
 		swap(stacks, 'a');
 	if (stacks.a_[0] == 3)
-	{
-		if (stacks.a_[1] == 4)
-			give_instructions(stacks, 2, "ra", "ra");
-		else if (stacks.a_[2] == 4)
-			give_instructions(stacks, 2, "sa", "oa");
-		else if (stacks.a_[3] == 4)
-			give_instructions(stacks, 4, "oa", "sa", "ra", "ra");
-	}
+		algo_2_1(stacks);
 	else if (stacks.a_[1] == 3)
 	{
 		if (stacks.a_[2] == 4)
@@ -49,23 +72,9 @@ void	algo_2(t_stacks stacks, int argc)
 			give_instructions(stacks, 3, "ra", "sa", "oa");
 	}
 	else if (stacks.a_[2] == 3)
-	{
-		if (stacks.a_[0] == 4)
-			give_instructions(stacks, 3, "oa", "sa", "ra");
-		else if (stacks.a_[1] == 4 && stacks.a_[0] == 1)
-			give_instructions(stacks, 4, "pb", "sa", "oa", "pa");
-		else if (stacks.a_[1] == 4)
-			give_instructions(stacks, 4, "ra", "sa", "ra", "ra");
-	}
+		algo_2_2(stacks);
 	else if (stacks.a_[3] == 3)
-	{
-		if (stacks.a_[0] == 4)
-			rotate(stacks, 'a');
-		else if (stacks.a_[1] == 4)
-			give_instructions(stacks, 2, "sa", "ra");
-		else if (stacks.a_[2] == 4)
-			give_instructions(stacks, 4, "pb", "sa", "ra", "pa");
-	}
+		algo_2_3(stacks);
 	if (stacks.a_[0] != 1)
 		swap(stacks, 'a');
 }

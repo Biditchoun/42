@@ -54,6 +54,8 @@ void	algorithms_hq(t_stacks stacks, int argc)
 		algo_1(stacks, argc);
 	else if (argc == 5)
 		algo_2(stacks, argc);
+	else
+		algo_3(stacks, argc);
 	printstacks(stacks, argc);
 	freestacks(stacks);
 }

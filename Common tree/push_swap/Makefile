@@ -1,6 +1,6 @@
 SRCS		=	push_swap.c init_stack_1.c init_stack_2.c\
 				instructions_1.c instructions_2.c utils.c\
-				algorithms_hq.c algorithms_1.c
+				algorithms_hq.c algorithms_1.c algorithms_2.c
 				
 OBJS		=	${SRCS:.c=.o}
 NAME		=	push_swap.a
