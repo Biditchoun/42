@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:13:44 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/30 15:57:43 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/05 03:21:11 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	rotating(int *a, int *a_)
 	a_[i] = buf_;
 }
 
-int	rotate(t_stacks stacks, char which)
+int	rotate(t_stacks stacks, char print, char which)
 {
 	if (which == 'a')
 		rotating(stacks.a, stacks.a_);
@@ -38,7 +38,8 @@ int	rotate(t_stacks stacks, char which)
 		rotating(stacks.a, stacks.a_);
 		rotating(stacks.b, stacks.b_);
 	}
-	ft_printf("r%c\n", which);
+	if (print == 'y')
+		ft_printf("r%c\n", which);
 	return (1);
 }
 
@@ -60,7 +61,7 @@ static void	rrotating(int *a, int *a_)
 	a_[i] = buf;
 }
 
-int	rrotate(t_stacks stacks, char which)
+int	rrotate(t_stacks stacks, char print, char which)
 {
 	if (which == 'a')
 		rrotating(stacks.a, stacks.a_);
@@ -71,6 +72,7 @@ int	rrotate(t_stacks stacks, char which)
 		rrotating(stacks.a, stacks.a_);
 		rrotating(stacks.b, stacks.b_);
 	}
-	ft_printf("rr%c\n", which);
+	if (print == 'y')
+		ft_printf("rr%c\n", which);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:12:47 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/30 15:57:06 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/05 06:56:32 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	swapping(int *a, int *a_)
 	a_[1] = buf;
 }
 
-int	swap(t_stacks stacks, char which)
+int	swap(t_stacks stacks, char print, char which)
 {
 	if (which == 'a')
 		swapping(stacks.a, stacks.a_);
@@ -37,7 +37,8 @@ int	swap(t_stacks stacks, char which)
 		swapping(stacks.a, stacks.a_);
 		swapping(stacks.a, stacks.a_);
 	}
-	ft_printf("s%c\n", which);
+	if (print == 'y')
+		ft_printf("s%c\n", which);
 	return (1);
 }
 
@@ -51,12 +52,13 @@ static void	pushing(int *a, int *a_, int *b, int *b_)
 	shift_up(a, a_);
 }
 
-int	push(t_stacks stacks, char which)
+int	push(t_stacks stacks, char print, char which)
 {
 	if (which == 'a')
 		pushing(stacks.b, stacks.b_, stacks.a, stacks.a_);
 	else if (which == 'b')
 		pushing(stacks.a, stacks.a_, stacks.b, stacks.b_);
-	ft_printf("p%c\n", which);	
+	if (print == 'y')
+		ft_printf("p%c\n", which);
 	return (1);
 }

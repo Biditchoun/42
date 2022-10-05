@@ -1,29 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algorithms_2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/05 03:08:50 by swijnber          #+#    #+#             */
+/*   Updated: 2022/10/05 08:02:29 by swijnber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	algo_3(t_stacks stacks, int argc)
+static t_stacks	sbuf_check(t_stacks stacks, int argc, char print)
 {
-	int 		count;
-	int			rt;
 	t_stacks	sbuf;
 
-	sbuf = sbuf_init(stacks);
-	if (!sbuf.a)
-		return (NULL);
-	argc--;
-	rt = 0;
-	count = 0;
-	while (count < argc / 2)
-	{
-		if (sbuf.a_[0] < argc / 2 + 1)
-			count += push(sbuf, 'b');
-		else if (stacks.a_[1] < argc / 2)
-			rt += rotate(sbuf, 'a');
-		else
-			rt += rrotate (sbuf, 'a');
-	}
-	if (sbuf.a_[0] > argc / 4 + 1)
-	rt += count;
-	while (stacks.b_[0] > 0)
-		rt += push(sbuf, 'a');
+	if (print != 'y')
+		sbuf = sbuf_init(stacks, argc);
+	else
+		sbuf = stacks;
+	return (sbuf);
+}
+
+static char	**instructs_base(void)
+{
+	char	rt[12][3];
+
+	rt[0] = "sa";
+	rt[1] = "sb";
+	rt[2] = "ss";
+	rt[3] = "pa";
+	rt[4] = "pb";
+	rt[5] = "ra";
+	rt[6] = "rb";
+	rt[7] = "rr";
+	rt[8] = "oa";
+	rt[9] = "ob";
+	rt[10] = "or";
+	rt[11] = NULL;
 	return (rt);
 }
+
+static int	check_stacks(t_stacks stacks, int argc)
+{
+	int	i;
+
+	if (stacks.b_[0] > 0)
+		return (1);
+	i = -1;
+	while (++i < argc)
+		if (stacks.a_[i] != i + 1)
+			return (1);
+	return (0);
+}
+
+static int	backtracking_kinda(t_stacks sbuf, int argc, char print)
+{
+
+	sbuf = sbuf_check(stacks, --argc, print);
+	if (!sbuf.a)
+		return (-1);
+
+}
+
+int	algo_4(t_stacks stacks, int argc, char print)
+{
+	//int			rt;
+	char		**base;
+	t_stacks	sbuf;
+
+	base = instructs_base(void);
+	if (!check_stacks(sbuf, --argc))
+		return (0);
+	return (1);
+}
+

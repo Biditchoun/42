@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:15:08 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/30 16:13:30 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/05 07:34:19 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int			*init_stack_a_(int *a, int argc);
 int			*init_stack_b(int argc);
 int			*init_stack_b_(int *a_, int argc);
 
-int			swap(t_stacks stacks, char which);
-int			push(t_stacks stacks, char which);
-int			rotate(t_stacks stacks, char which);
-int			rrotate(t_stacks stacks, char which);
+int			swap(t_stacks stacks, char print, char which);
+int			push(t_stacks stacks, char print, char which);
+int			rotate(t_stacks stacks, char print, char which);
+int			rrotate(t_stacks stacks, char print, char which);
 int			shift_down(int *a, int *a_);
 int			shift_up(int *a, int *a_);
 
@@ -40,10 +40,11 @@ void		algorithms_hq(t_stacks stacks, int argc);
 t_stacks	sbuf_init(t_stacks stacks, int argc);
 void		*freestacks(t_stacks stacks);
 int			arrchr(int *a, int n);
-void		give_instructions(t_stacks stacks, int orders_count, ...);
-void		algo_1(t_stacks stacks, int argc);
-void		algo_2(t_stacks stacks, int argc);
-int			algo_3(t_stacks stacks, int argc);
+int			give_instructs(t_stacks stacks, char print, int orders_count, ...);
+int			algo_1(t_stacks stacks, int argc, char print);
+int			algo_2(t_stacks stacks, int argc, char print);
+int			algo_3(t_stacks stacks, int argc, char print);
+int			algo_4(t_stacks stacks, int argc, char print);
 
 void		printstacks(t_stacks stacks, int argc);
 
