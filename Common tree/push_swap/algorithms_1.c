@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:11:41 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/05 07:51:22 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/05 22:59:36 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	algo_1(t_stacks stacks, int argc, char print)
 	return (rt);
 }
 
-/*static int	algo_2_1(t_stacks stacks, char print)
+static int	algo_2_1(t_stacks stacks, char print)
 {
 	int	rt;
 
@@ -99,7 +99,7 @@ int	algo_2(t_stacks stacks, int argc, char print)
 	if (stacks.a_[0] != 1)
 		rt += swap(stacks, print, 'a');
 	return (rt);
-}*/
+}
 
 static int	algo_3_1(t_stacks sbuf, int argc, char print, int rt)
 {

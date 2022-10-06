@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:11:53 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/05 07:35:00 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:02:48 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,15 @@ void	algorithms_hq(t_stacks stacks, int argc)
 	int	(*f)(t_stacks, int, char);
 	int	count[2];
 
-	if (argc < 5)
-		count[0] = algo_1(stacks, argc, 'y');
-	else if (argc == 5)
-		count[0] = algo_2(stacks, argc, 'y');
-	else
-	{
-		count[0] = algo_3(stacks, argc, 'n');
-		f = &algo_3;
-		count[1] = algo_4(stacks, argc, 'n');
-		if (count[0] > count[1])
-			f = &algo_4;
-		count[0] = ft_min(count[0], count[1]);
-		f(stacks, argc, 'y');
-	}
-	ft_printf("%i\n", count);
+	count[0] = algo_4(stacks, argc);
+	if (count[0] != INT_MAX)
+		freestacks(stacks);
+	if (count[0] != INT_MAX)
+		return ;
+	count[0] = algo_3(stacks, argc, 'n');
+	f = &algo_3;
+	f(stacks, argc, 'y');
+	ft_printf("%i\n", count[0]);
 	printstacks(stacks, argc);
 	freestacks(stacks);
 }
