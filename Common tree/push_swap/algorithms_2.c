@@ -5,121 +5,107 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 03:08:50 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/06 15:29:11 by swijnber         ###   ########.fr       */
+/*   Created: 2022/10/07 23:48:38 by swijnber          #+#    #+#             */
+/*   Updated: 2022/10/08 02:49:04 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static char	**instructs_base(void)
+/*static void	print_arr(int *arr)
 {
-	char	**rt;
-
-	rt = malloc(sizeof(char *) * 12);
-	if (!rt)
-		return (NULL);
-	rt[0] = "sa";
-	rt[1] = "ra";
-	rt[2] = "oa";
-	rt[3] = "pb";
-	rt[4] = "sb";
-	rt[5] = "ss";
-	rt[6] = "rb";
-	rt[7] = "rr";
-	rt[8] = "ob";
-	rt[9] = "or";
-	rt[10] = "pa";
-	rt[11] = NULL;
-	return (rt);
-}
-
-/*static int	first_checks(int *instructs)
-{
-	//int	i;
-
-	if (instructs[1] > 3)
-	{
-		instructs[0]++;
-		instructs[1] = 0;
-	}
-	if (instructs[0] > 3)
-		instructs[0] = 11;
-	if (instructs[0] > 3)
-		return (0);
-	return (1);
+	int i = 0;
+	while (arr[i] != -1)
+		ft_printf("%i ", arr[i++]);
+	ft_printf("fill \n");
 }*/
-
-static int	check_insts(t_stacks stacks, int argc, int *instructs, char print)
-{
-	char		**base;
-	int			i;
-	t_stacks	sbuf;
-
-	//if (!first_checks(instructs))
-	//	return (0);
-	sbuf = sbuf_init(stacks, argc);
-	if (!sbuf.a)
-		return (-1);
-	base = instructs_base();
-	if (!base)
-		return ((int)freestacks(sbuf) - 1);
-	i = 0;
-	while (instructs[i] != -1)
-		give_instructs(sbuf, print, 1, base[instructs[i++]]);
-	free(base);
-	if (sbuf.b_[0] > 0)
-		return ((int)freestacks(sbuf));
-	i = -1;
-	while (++i < argc - 1)
-		if (sbuf.a_[i] != i + 1)
-			return ((int)freestacks(sbuf));
-	freestacks(sbuf);
-	return (1);
-}
-
-static int	fill_instructs(int *instructs, int count)
+static int	fill_arr(int *arr, int n, int x, int y)
 {
 	int	i;
 
-	i = count - 1;
-	while (i > -1 && instructs[i] == 10)
-		i--;
-	if (i > -1)
+	arr[0] = n;
+	i = 1;
+	while (arr[i] != -1)
 	{
-		instructs[i]++;
-		while (++i < count)
-			instructs[i] = 0;
-		return (0);
+		arr[i++] = x;
+		if (arr[i] != -1)
+			arr[i++] = y;
 	}
-	else
-	{
-		i = -1;
-		while (++i < count + 1)
-			instructs[i] = 0;
-		instructs[i] = -1;
-		return (1);
-	}
+	return (1);
 }
 
-int	algo_4(t_stacks stacks, int argc)
+/*static int	param_fill_arr(int *arr, int x, int y, int z)
 {
-	int		instructs[100];
-	int		count;
-
-	instructs[0] = -1;
-	if (check_insts(stacks, argc, instructs, 'n') > 0)
-		return (0);
-	count = 0;
-	while (count < 100)
+	if (arr[1] == x && x != 10)
 	{
-		count += fill_instructs(instructs, count);
-		ft_printf("%i | %i %i %i %i %i %i\n", count, instructs[0], instructs[1], instructs[2], instructs[3], instructs[4]);
-		if (check_insts(stacks, argc, instructs, 'n') > 0)
-			break ;
+		if (x != y - 1)
+			return (fill_arr(&arr[1], x + 1, 0, 1));
+		else
+			arr[1]++;
 	}
-	if (count == 100)
-		return (INT_MAX);
-	check_insts(stacks, argc, instructs, 'y');
-	return (count);
+	if (arr[1] == y && y != 10)
+	{
+		if (y != z - 1)
+			return (fill_arr(&arr[1], y + 1, 0, 1));
+		else
+			arr[1]++;
+	}
+	if (arr[1] == z && z != 10)
+		return (fill_arr(&arr[1], z + 1, 0, 1));
+	if (arr[0] != 10)
+		return (fill_arr(arr, arr[0] + 1, 0, 1));
+	fill_arr(arr, 10, 10, 10);
+	return (-1);
+}*/
+
+int	instructs_check(int *instructs)
+{
+	int	i;
+	int	p;
+	int	rt;
+
+	p = 0;
+	i = -1;
+	rt = 0;
+	while (instructs[++i] != -1)
+	{
+		if (instructs[i] > 3 && p < 1)
+			return (fill_arr(&instructs[i], 10, 10, 10));
+		if (instructs[i] > 4 && p < 2)
+			return (fill_arr(&instructs[i], 10, 10, 10));
+		/*if (instructs[i] == 0)
+			rt += param_fill_arr(&instructs[i], 0, 6, 20);
+		else if (instructs[i] == 1)
+			rt += param_fill_arr(&instructs[i], 2, 10, 20);
+		else if (instructs[i] == 2)
+			rt += param_fill_arr(&instructs[i], 1, 8, 20);
+		else if (instructs[i] == 3)
+			rt += param_fill_arr(&instructs[i], 4, 4, 20);
+		else if (instructs[i] == 4)
+			rt += param_fill_arr(&instructs[i], 3, 3, 20);
+		else if (instructs[i] == 5)
+			rt += param_fill_arr(&instructs[i], 5, 6, 20);
+		else if (instructs[i] == 6)
+			rt += param_fill_arr(&instructs[i], 0, 5, 20);
+		else if (instructs[i] == 7)
+			rt += param_fill_arr(&instructs[i], 9, 10, 20);
+		else if (instructs[i] == 8)
+			rt += param_fill_arr(&instructs[i], 2, 9, 10);
+		else if (instructs[i] == 9)
+			rt += param_fill_arr(&instructs[i], 7, 8, 20);
+		else if (instructs[i] == 10)
+			rt += param_fill_arr(&instructs[i], 1, 7, 8);
+		if (rt)
+		{
+			if (rt == 1)
+				return (0);
+			else
+				return (1);
+		}*/
+		(void)rt;
+		if (instructs[i] == 3)
+			p++;
+		else if (instructs[i] == 4)
+			p--;
+	}
+	return (0);
 }

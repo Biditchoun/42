@@ -5,141 +5,117 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 18:11:41 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/05 22:59:36 by swijnber         ###   ########.fr       */
+/*   Created: 2022/10/07 23:44:09 by swijnber          #+#    #+#             */
+/*   Updated: 2022/10/08 02:49:07 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	algo_1(t_stacks stacks, int argc, char print)
+static char	**instructs_base(void)
 {
-	int	rt;
+	char	**rt;
 
-	rt = 0;
-	if (argc > 4)
-		return (-1);
-	argc--;
-	rt = 0;
-	if (stacks.a_[0] > ft_max(stacks.a_[1], stacks.a_[2]))
-		rt += rotate(stacks, print, 'a');
-	else if (stacks.a_[1] > ft_max(stacks.a_[0], stacks.a_[2]) && argc == 3)
-		rt += rrotate(stacks, print, 'a');
-	if (stacks.a_[0] > stacks.a_[1])
-		rt += swap(stacks, print, 'a');
+	rt = malloc(sizeof(char *) * 12);
+	if (!rt)
+		return (NULL);
+	rt[0] = "sa";
+	rt[1] = "ra";
+	rt[2] = "oa";
+	rt[3] = "pb";
+	rt[4] = "pa";
+	rt[5] = "sb";
+	rt[6] = "ss";
+	rt[7] = "rb";
+	rt[8] = "rr";
+	rt[9] = "ob";
+	rt[10] = "or";
+	rt[11] = NULL;
 	return (rt);
 }
-
-static int	algo_2_1(t_stacks stacks, char print)
+static void	print_arr(int *arr)
 {
-	int	rt;
-
-	rt = 0;
-	if (stacks.a_[1] == 4)
-		rt = give_instructs(stacks, print, 2, "ra", "ra");
-	else if (stacks.a_[2] == 4)
-		rt = give_instructs(stacks, print, 2, "sa", "oa");
-	else if (stacks.a_[3] == 4)
-		rt = give_instructs(stacks, print, 4, "oa", "sa", "ra", "ra");
-	return (rt);
+	int i = 0;
+	while (arr[i] != -1)
+		ft_printf("%i ", arr[i++]);
+	ft_printf("%i", arr[i]);
+	ft_printf("\n");
 }
-
-static int	algo_2_2(t_stacks stacks, char print)
+static int	check_insts(t_stacks stacks, int argc, int *instructs, char print)
 {
-	int	rt;
-
-	rt = 0;
-	if (stacks.a_[0] == 4)
-		rt = give_instructs(stacks, print, 3, "oa", "sa", "ra");
-	else if (stacks.a_[1] == 4 && stacks.a_[0] == 1)
-		rt = give_instructs(stacks, print, 4, "pb", "sa", "oa", "pa");
-	else if (stacks.a_[1] == 4)
-		rt = give_instructs(stacks, print, 4, "ra", "sa", "ra", "ra");
-	return (rt);
-}
-
-static int	algo_2_3(t_stacks stacks, char print)
-{
-	int	rt;
-
-	rt = 0;
-	if (stacks.a_[0] == 4)
-		rt = rotate(stacks, print, 'a');
-	else if (stacks.a_[1] == 4)
-		rt = give_instructs(stacks, print, 2, "sa", "ra");
-	else if (stacks.a_[2] == 4)
-		rt = give_instructs(stacks, print, 4, "pb", "sa", "ra", "pa");
-	return (rt);
-}
-
-int	algo_2(t_stacks stacks, int argc, char print)
-{
-	int	rt;
-
-	if (argc != 5)
-		return (-1);
-	argc--;
-	rt = 0;
-	if (stacks.a_[0] > stacks.a_[1]
-		&& (stacks.a_[0] != 4 || (stacks.a_[0] == 4 && stacks.a_[1] == 3)))
-		rt += swap(stacks, print, 'a');
-	if (stacks.a_[0] == 3)
-		rt += algo_2_1(stacks, print);
-	else if (stacks.a_[1] == 3)
-	{
-		if (stacks.a_[2] == 4)
-			rt += rrotate(stacks, print, 'a');
-		else if (stacks.a_[3] == 4)
-			rt += give_instructs(stacks, print, 3, "ra", "sa", "oa");
-	}
-	else if (stacks.a_[2] == 3)
-		rt += algo_2_2(stacks, print);
-	else if (stacks.a_[3] == 3)
-		rt += algo_2_3(stacks, print);
-	if (stacks.a_[0] != 1)
-		rt += swap(stacks, print, 'a');
-	return (rt);
-}
-
-static int	algo_3_1(t_stacks sbuf, int argc, char print, int rt)
-{
-	int	i;
-	int	count;
-
-	count = 1;
-	while (sbuf.a_[3] > 0)
-	{
-		if (sbuf.a_[0] > sbuf.a_[1])
-			rt += swap(sbuf, print, 'a');
-		i = 0;
-		while (sbuf.a_[i] != count)
-			i++;
-		if (i < argc / 2 + 1)
-			while (sbuf.a_[0] != count)
-				rt += rotate(sbuf, print, 'a');
-		else
-			while (sbuf.a_[0] != count)
-				rt += rrotate(sbuf, print, 'a');
-		rt += push(sbuf, print, 'b');
-		count++;
-	}
-	return (rt);
-}
-
-int	algo_3(t_stacks stacks, int argc, char print)
-{
-	int			rt;
+	char		**base;
+	int			i;
 	t_stacks	sbuf;
 
+	/*if (instructs_check(instructs))
+		return (0);
+	print_arr(instructs);
+	sleep(1);*/
 	sbuf = sbuf_init(stacks, argc);
 	if (!sbuf.a)
 		return (-1);
-	argc--;
-	rt = 0;
-	rt += algo_3_1(sbuf, argc, print, rt);
-	rt += algo_1(sbuf, 4, print);
-	while (sbuf.b_[0] > 0)
-		rt += push(sbuf, print, 'a');
+	ft_printf("ptet\n");
+	base = instructs_base();
+	if (!base)
+		return ((int)freestacks(sbuf) - 1);
+	ft_printf("oui\n");
+	print_arr(instructs);
+	i = 0;
+	while (instructs[i] != -1)
+		give_instructs(sbuf, print, 1, base[instructs[i++]]);
+	free(base);
+	ft_printf("non\n");
+	if (sbuf.b_[0] > 0)
+		return ((int)freestacks(sbuf));
+	i = -1;
+	while (++i < argc - 1)
+		if (sbuf.a_[i] != i + 1)
+			return ((int)freestacks(sbuf));
 	freestacks(sbuf);
-	return (rt);
+	return (1);
+}
+
+static int	fill_instructs(int *instructs, int count)
+{
+	int	i;
+
+	i = count - 1;
+	while (i > -1 && instructs[i] == 10)
+		i--;
+	if (i > -1)
+	{
+		instructs[i]++;
+		while (++i < count)
+			instructs[i] = 0;
+		return (0);
+	}
+	else
+	{
+		i = -1;
+		while (++i < count + 1)
+			instructs[i] = 0;
+		instructs[i] = -1;
+		return (1);
+	}
+}
+
+int	algo_1(t_stacks stacks, int argc)
+{
+	int		instructs[100];
+	int		count;
+
+	instructs[0] = -1;
+	if (check_insts(stacks, argc, instructs, 'n') > 0)
+		return (0);
+	count = 0;
+	while (count < 100)
+	{
+		count += fill_instructs(instructs, count);
+		if (check_insts(stacks, argc, instructs, 'n') > 0)
+			break ;
+	}
+	if (count == 100)
+		return (INT_MAX);
+	check_insts(stacks, argc, instructs, 'y');
+	return (count);
 }

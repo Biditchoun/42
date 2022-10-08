@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:15:08 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/05 22:58:54 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/07 23:51:59 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ t_stacks	sbuf_init(t_stacks stacks, int argc);
 void		*freestacks(t_stacks stacks);
 int			arrchr(int *a, int n);
 int			give_instructs(t_stacks stacks, char print, int orders_count, ...);
-int			algo_1(t_stacks stacks, int argc, char print);
+int			algo_1(t_stacks stacks, int argc);
+int			instructs_check(int *instructs);
 int			algo_2(t_stacks stacks, int argc, char print);
-int			algo_3(t_stacks stacks, int argc, char print);
-int			algo_4(t_stacks stacks, int argc);
 
 void		printstacks(t_stacks stacks, int argc);
 
