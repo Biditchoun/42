@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:13:44 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/05 03:21:11 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/09 23:57:57 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,18 @@ static void	rrotating(int *a, int *a_)
 {
 	int	i;
 	int	buf;
+	int	buf_;
 
 	if (a_[0] < 1 || a_[1] < 1)
 		return ;
 	i = 0;
 	while (a_[i] > 0)
 		i++;
-	buf = a_[i];
-	i = shift_down(a, a_);
-	a[0] = a[i];
-	a_[0] = a_[i];
-	a[i] = INT_MAX;
-	a_[i] = buf;
+	buf = a[--i];
+	buf_ = a_[i];
+	shift_down(a, a_, i);
+	a[0] = buf;
+	a_[0] = buf_;
 }
 
 int	rrotate(t_stacks stacks, char print, char which)

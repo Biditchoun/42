@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:12:47 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/05 06:56:32 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/09 23:58:22 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	swapping(int *a, int *a_)
 {
 	int	buf;
 
-	if ((a[0] < 1 || a[1] < 1))
+	if ((a_[0] < 1 || a_[1] < 1))
 		return ;
 	buf = a[0];
 	a[0] = a[1];
@@ -44,9 +44,16 @@ int	swap(t_stacks stacks, char print, char which)
 
 static void	pushing(int *a, int *a_, int *b, int *b_)
 {
+	int	i;
+
 	if (a_[0] < 1)
 		return ;
-	shift_down(b, b_);
+	i = 0;
+	while (b_[i] > 0)
+		i++;
+	b_[i + 1] = b_[i];
+	b_[i] = b_[i - 1];
+	shift_down(b, b_, i);
 	b[0] = a[0];
 	b_[0] = a_[0];
 	shift_up(a, a_);

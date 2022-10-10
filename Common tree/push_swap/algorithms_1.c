@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:44:09 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/08 02:49:07 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/10 06:31:09 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,19 @@ static int	check_insts(t_stacks stacks, int argc, int *instructs, char print)
 	int			i;
 	t_stacks	sbuf;
 
-	/*if (instructs_check(instructs))
+	if (instructs_check(instructs))
 		return (0);
-	print_arr(instructs);
-	sleep(1);*/
 	sbuf = sbuf_init(stacks, argc);
 	if (!sbuf.a)
 		return (-1);
-	ft_printf("ptet\n");
 	base = instructs_base();
 	if (!base)
 		return ((int)freestacks(sbuf) - 1);
-	ft_printf("oui\n");
 	print_arr(instructs);
 	i = 0;
 	while (instructs[i] != -1)
 		give_instructs(sbuf, print, 1, base[instructs[i++]]);
 	free(base);
-	ft_printf("non\n");
 	if (sbuf.b_[0] > 0)
 		return ((int)freestacks(sbuf));
 	i = -1;
