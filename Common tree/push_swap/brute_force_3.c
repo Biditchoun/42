@@ -6,19 +6,19 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 05:35:56 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/10 06:47:55 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 08:17:41 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-static void	print_arr(int *arr)
+/*static void	print_arr(int *arr)
 {
 	int i = 0;
 	while (arr[i] != -1)
 		ft_printf("%i ", arr[i++]);
 	ft_printf("%i", arr[i]);
 	ft_printf("push \n");
-}
+}*/
 static int	fill_arr(int *arr, int n, int x, int y)
 {
 	int	i;
@@ -57,8 +57,8 @@ int	push_validity_check(int *instructs, int p, int i)
 		b--;
 		i--;
 	}
-	print_arr(instructs);
+	//print_arr(instructs);
 	fill_arr(&instructs[++i], 4, 0, 1);
-	print_arr(instructs);
+	//print_arr(instructs);
 	return (instructs_check(instructs));
 }

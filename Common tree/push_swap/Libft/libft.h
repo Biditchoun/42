@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 21:25:52 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/03 17:25:13 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 07:26:56 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 int		*ft_arrcp(int *arr, int n);
 char	*ft_strdup(const char *s);
 void	*ft_free(void *s, void *rt);
+void	*ft_free2(void *s1, void *s2, void *rt);
 
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);

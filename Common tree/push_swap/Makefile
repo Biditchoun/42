@@ -6,14 +6,14 @@
 #    By: swijnber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 05:21:22 by swijnber          #+#    #+#              #
-#    Updated: 2022/10/10 05:32:21 by swijnber         ###   ########.fr        #
+#    Updated: 2022/10/11 07:55:20 by swijnber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		=	push_swap.c init_stack_1.c init_stack_2.c\
-				instructions_1.c instructions_2.c utils.c\
-				algorithms_hq.c algorithms_1.c algorithms_2.c algorithms_3.c\
-				algorithms_4.c
+				instructions_1.c instructions_2.c\
+				algorithms_hq.c algorithm_1.c\
+				brute_force_1.c brute_force_2.c brute_force_3.c
 				
 OBJS		=	${SRCS:.c=.o}
 NAME		=	push_swap.a

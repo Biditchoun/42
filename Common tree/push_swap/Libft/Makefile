@@ -6,7 +6,7 @@
 #    By: swijnber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/15 11:15:02 by swijnber          #+#    #+#              #
-#    Updated: 2022/06/02 18:16:21 by swijnber         ###   ########.fr        #
+#    Updated: 2022/10/11 07:28:14 by swijnber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,14 @@ SRCS	=	ft_isprint.c ft_isdigit.c ft_isascii.c ft_isalpha.c ft_isalnum.c\
 			ft_atoi.c ft_itoa.c ft_hex_conv.c\
 			ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c\
 			ft_memcmp.c\
-			ft_strdup.c ft_arrcp.c ft_calloc.c ft_free.c ft_substr.c\
+			ft_strdup.c ft_arrcp.c ft_calloc.c ft_substr.c\
 			ft_strjoin.c ft_strtrim.c ft_split.c\
 			ft_strmapi.c ft_striteri.c\
 			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
 			ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c\
 			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c\
 			ft_lstiter.c ft_lstmap.c\
+			ft_free.c ft_free2.c\
 			\
 			ft_printf.c printfing.c printf_utilities.c\
 			printf_chars.c printf_nb.c

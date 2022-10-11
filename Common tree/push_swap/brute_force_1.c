@@ -6,70 +6,44 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:44:09 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/10 06:31:09 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 08:41:30 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static char	**instructs_base(void)
+static t_brute	force_init(int *a, int *instructs, int argc)
 {
-	char	**rt;
+	t_brute	rt;
 
-	rt = malloc(sizeof(char *) * 12);
-	if (!rt)
-		return (NULL);
-	rt[0] = "sa";
-	rt[1] = "ra";
-	rt[2] = "oa";
-	rt[3] = "pb";
-	rt[4] = "pa";
-	rt[5] = "sb";
-	rt[6] = "ss";
-	rt[7] = "rb";
-	rt[8] = "rr";
-	rt[9] = "ob";
-	rt[10] = "or";
-	rt[11] = NULL;
+	rt.base = malloc(sizeof(char *) * 12);
+	if (!rt.base)
+		return (rt);
+	rt.base[0] = "sa";
+	rt.base[1] = "ra";
+	rt.base[2] = "oa";
+	rt.base[3] = "pb";
+	rt.base[4] = "pa";
+	rt.base[5] = "sb";
+	rt.base[6] = "ss";
+	rt.base[7] = "rb";
+	rt.base[8] = "rr";
+	rt.base[9] = "ob";
+	rt.base[10] = "or";
+	rt.base[11] = NULL;
+	rt.a = a;
+	rt.instructs = instructs;
+	rt.argc = argc;
 	return (rt);
 }
-static void	print_arr(int *arr)
+/*static void	print_arr(int *arr)
 {
 	int i = 0;
 	while (arr[i] != -1)
 		ft_printf("%i ", arr[i++]);
 	ft_printf("%i", arr[i]);
 	ft_printf("\n");
-}
-static int	check_insts(t_stacks stacks, int argc, int *instructs, char print)
-{
-	char		**base;
-	int			i;
-	t_stacks	sbuf;
-
-	if (instructs_check(instructs))
-		return (0);
-	sbuf = sbuf_init(stacks, argc);
-	if (!sbuf.a)
-		return (-1);
-	base = instructs_base();
-	if (!base)
-		return ((int)freestacks(sbuf) - 1);
-	print_arr(instructs);
-	i = 0;
-	while (instructs[i] != -1)
-		give_instructs(sbuf, print, 1, base[instructs[i++]]);
-	free(base);
-	if (sbuf.b_[0] > 0)
-		return ((int)freestacks(sbuf));
-	i = -1;
-	while (++i < argc - 1)
-		if (sbuf.a_[i] != i + 1)
-			return ((int)freestacks(sbuf));
-	freestacks(sbuf);
-	return (1);
-}
-
+}*/
 static int	fill_instructs(int *instructs, int count)
 {
 	int	i;
@@ -94,23 +68,57 @@ static int	fill_instructs(int *instructs, int count)
 	}
 }
 
-int	algo_1(t_stacks stacks, int argc)
+static int	check_instructs(t_brute force, char print)
+{
+	int	i;
+	int	*a_;
+	int	*b_;
+
+	if (instructs_check(force.instructs))
+		return (0);
+	a_ = ft_arrcp(force.a, force.argc);
+	if (!a_)
+		return (-1);
+	b_ = malloc(sizeof(int) * force.argc);
+	if (!b_)
+		return ((int)ft_free((void *)a_, NULL) - 1);
+	b_[0] = a_[force.argc];
+	i = 0;
+	while (force.instructs[i] != -1)
+		give_instructs(a_, b_,  print, 1, force.base[force.instructs[i++]]);
+	i = -1;
+	while (++i < force.argc - 1)
+		if (a_[i] != i + 1)
+			return ((int)ft_free2((void *)a_, (void *)b_, NULL));
+	free(a_);
+	free(b_);
+	return (1);
+}
+
+int	brute_force(int *a_, int argc)
 {
 	int		instructs[100];
 	int		count;
+	t_brute	force;
+	int		safe;
 
 	instructs[0] = -1;
-	if (check_insts(stacks, argc, instructs, 'n') > 0)
-		return (0);
+	force = force_init(a_, instructs, argc);
+	if (!force.base)
+		return (-1);
 	count = 0;
 	while (count < 100)
 	{
 		count += fill_instructs(instructs, count);
-		if (check_insts(stacks, argc, instructs, 'n') > 0)
+		safe = check_instructs(force, 'n');
+		if (safe == -1)
+			return ((int)ft_free((void *)force.base, NULL) - 1);
+		else if (safe)
 			break ;
 	}
 	if (count == 100)
 		return (INT_MAX);
-	check_insts(stacks, argc, instructs, 'y');
+	check_instructs(force, 'y');
+	free(force.base);
 	return (count);
 }

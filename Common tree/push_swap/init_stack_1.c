@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:12:23 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/29 18:12:25 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 07:48:24 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	*check_duplicate(int argc, int *a)
 	return (a);
 }
 
-int	*init_stack_a(int argc, char **argv)
+int	*init_a(int argc, char **argv)
 {
 	int	*a;
 

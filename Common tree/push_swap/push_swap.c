@@ -6,38 +6,51 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:14:45 by swijnber          #+#    #+#             */
-/*   Updated: 2022/09/29 18:14:53 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 07:53:56 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	error_rt(t_stacks stacks, int argc)
+static int	error_rt(int *a, int argc)
 {
 	if (argc < 2)
 		return (-1);
 	write(2, "Error\n", 6);
-	if (stacks.a)
-		freestacks(stacks);
+	if (a)
+		free(a);
 	return (-1);
+}
+
+static int	check_order(int *a, int argc)
+{
+	int	i;
+
+	i = -1;
+	while (++i < argc - 1)
+		if (a[i] != i + 1)
+			return (0);
+	return (1);
 }
 
 int	main(int argc, char **argv)
 {
-	t_stacks	stacks;
+	int	*a;
+	int	*a_;
+	int	count;
 
-	stacks.a = init_stack_a(argc, argv);
-	if (!stacks.a)
-		return (error_rt(stacks, argc));
-	stacks.b = init_stack_b(argc);
-	if (!stacks.b)
-		return (error_rt(stacks, argc));
-	stacks.a_ = init_stack_a_(stacks.a, argc - 1);
-	if (!stacks.a_)
-		return (error_rt(stacks, argc));
-	stacks.b_ = init_stack_b_(stacks.a_, argc);
-	if (!stacks.b_)
-		return (error_rt(stacks, argc));
-	algorithms_hq(stacks, argc);
-	return (0);
+	ft_printf("Penser a tester check_order, shift down\n");
+	a = init_a(argc, argv);
+	if (!a)
+		return (error_rt(NULL, argc));
+	a_ = init_a_(a, argc);
+	if (!a_)
+		return (error_rt(a, argc));
+	free(a);
+	if (check_order(a_, argc))
+		return ((int)ft_free((void *)a_, NULL));
+	count = algorithms_hq(a_, argc);
+	if (count < 0)
+		return (error_rt(a_, argc));
+	return (count);
 }

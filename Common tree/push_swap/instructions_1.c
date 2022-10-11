@@ -6,65 +6,62 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:12:47 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/09 23:58:22 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 08:00:38 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	swapping(int *a, int *a_)
+static void	swapping(int *a)
 {
 	int	buf;
 
-	if ((a_[0] < 1 || a_[1] < 1))
+	if ((a[0] < 1 || a[1] < 1))
 		return ;
 	buf = a[0];
 	a[0] = a[1];
 	a[1] = buf;
-	buf = a_[0];
-	a_[0] = a_[1];
-	a_[1] = buf;
 }
 
-int	swap(t_stacks stacks, char print, char which)
+int	swap(int *a, int *b, char print, char which)
 {
 	if (which == 'a')
-		swapping(stacks.a, stacks.a_);
+		swapping(a);
 	else if (which == 'b')
-		swapping(stacks.b, stacks.b_);
+		swapping(b);
 	else if (which == 's')
 	{
-		swapping(stacks.a, stacks.a_);
-		swapping(stacks.a, stacks.a_);
+		swapping(a);
+		swapping(b);
 	}
 	if (print == 'y')
 		ft_printf("s%c\n", which);
 	return (1);
 }
 
-static void	pushing(int *a, int *a_, int *b, int *b_)
+static void	pushing(int *a, int *b)
 {
 	int	i;
 
-	if (a_[0] < 1)
+	if (a[0] < 1)
 		return ;
 	i = 0;
-	while (b_[i] > 0)
+	while (b[i] > 0)
 		i++;
-	b_[i + 1] = b_[i];
-	b_[i] = b_[i - 1];
-	shift_down(b, b_, i);
+	b[i + 1] = b[i];
+	while (--i - 1)
+		b[i + 1] = b[i];
 	b[0] = a[0];
-	b_[0] = a_[0];
-	shift_up(a, a_);
+	while (a[++i] > 0)
+		a[i] = a[i + 1];
 }
 
-int	push(t_stacks stacks, char print, char which)
+int	push(int *a, int *b, char print, char which)
 {
-	if (which == 'a')
-		pushing(stacks.b, stacks.b_, stacks.a, stacks.a_);
-	else if (which == 'b')
-		pushing(stacks.a, stacks.a_, stacks.b, stacks.b_);
+	if (which == 'b')
+		pushing(a, b);
+	else if (which == 'a')
+		pushing(b, a);
 	if (print == 'y')
 		ft_printf("p%c\n", which);
 	return (1);

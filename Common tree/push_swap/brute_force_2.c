@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:48:38 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/10 06:47:57 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 08:17:56 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ int	instructs_check(int *instructs)
 		rt = first_checks(instructs, i, p);
 		if (rt)
 		{
-			ft_printf("oui\n");
-			sleep(1);
 			if (rt == 1)
 				return (instructs_check(instructs));
 			else

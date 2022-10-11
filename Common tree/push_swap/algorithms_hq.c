@@ -6,63 +6,52 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:11:53 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/10 01:29:25 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 08:41:33 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	give_instructs(t_stacks stacks, char print, int orders_count, ...)
+int	give_instructs(int *a, int *b, int print, ...)
 {
 	va_list	orders;
 	char	*order;
+	int		count;
 	int		i;
 
-	va_start(orders, orders_count);
+	va_start(orders, print);
+	count = va_arg(orders, int);
 	i = 0;
-	while (i++ < orders_count)
+	while (i++ < count)
 	{
 		order = va_arg(orders, char *);
 		if (order[0] == 's')
-			swap(stacks, print, order[1]);
+			swap(a, b, print, order[1]);
 		else if (order[0] == 'p')
-			push(stacks, print, order[1]);
+			push(a, b, print, order[1]);
 		else if (order[0] == 'r')
-			rotate(stacks, print, order[1]);
+			rotate(a, b, print, order[1]);
 		else if (order[0] == 'o')
-			rrotate(stacks, print, order[1]);
+			rrotate(a, b, print, order[1]);
 	}
 	va_end(orders);
-	return (orders_count);
+	return (count);
 }
 
-t_stacks	sbuf_init(t_stacks stacks, int argc)
+int	algorithms_hq(int *a_, int argc)
 {
-	t_stacks	sbuf;
+	int			(*f)(int *, int, char);
+	int			count[2];
 
-	sbuf.a = ft_arrcp(stacks.a, argc - 1);
-	sbuf.a_ = ft_arrcp(stacks.a_, argc);
-	sbuf.b = ft_arrcp(stacks.b, argc - 1);
-	sbuf.b_ = ft_arrcp(stacks.b_, argc);
-	if (!sbuf.a || !sbuf.a_ || !sbuf.b || !sbuf.b_)
-		freestacks(sbuf);
-	return (sbuf);
-}
-
-void	algorithms_hq(t_stacks stacks, int argc)
-{
-	int	(*f)(t_stacks, int, char);
-	int	count[2];
-
-	count[0] = algo_1(stacks, argc);
+	count[0] = brute_force(a_, argc);
+	if (count[0] == -1)
+		return ((int)ft_free((void *)a_, NULL) - 1);
 	if (count[0] != INT_MAX)
-		freestacks(stacks);
-	if (count[0] != INT_MAX)
-		return ;
-	count[0] = algo_2(stacks, argc, 'n');
-	f = &algo_2;
-	f(stacks, argc, 'y');
+		return ((int)ft_free((void *)a_, NULL) + count[0]);
+	count[0] = algo_1(a_, argc, 'n');
+	f = &algo_1;
+	f(a_, argc, 'y');
 	ft_printf("%i\n", count[0]);
-	printstacks(stacks, argc);
-	freestacks(stacks);
+	free(a_);
+	return (count[0]);
 }

@@ -6,71 +6,68 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:13:44 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/09 23:57:57 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 06:43:12 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rotating(int *a, int *a_)
+static void	rotating(int *a)
 {
 	int	i;
 	int	buf;
-	int	buf_;
 
-	if (a_[0] < 1 || a_[1] < 1)
+	if (a[0] < 1 || a[1] < 1)
 		return ;
 	buf = a[0];
-	buf_ = a_[0];
-	i = shift_up(a, a_);
+	i = -1;
+	while (a[++i + 1] > 0)
+		a[i] = a[i + 1];
 	a[i] = buf;
-	a_[i] = buf_;
 }
 
-int	rotate(t_stacks stacks, char print, char which)
+int	rotate(int *a, int *b, char print, char which)
 {
 	if (which == 'a')
-		rotating(stacks.a, stacks.a_);
+		rotating(a);
 	else if (which == 'b')
-		rotating(stacks.b, stacks.b_);
+		rotating(b);
 	else if (which == 'r')
 	{
-		rotating(stacks.a, stacks.a_);
-		rotating(stacks.b, stacks.b_);
+		rotating(a);
+		rotating(b);
 	}
 	if (print == 'y')
 		ft_printf("r%c\n", which);
 	return (1);
 }
 
-static void	rrotating(int *a, int *a_)
+static void	rrotating(int *a)
 {
 	int	i;
 	int	buf;
-	int	buf_;
 
-	if (a_[0] < 1 || a_[1] < 1)
+	if (a[0] < 1 || a[1] < 1)
 		return ;
 	i = 0;
-	while (a_[i] > 0)
+	while (a[i] > 0)
 		i++;
-	buf = a[--i];
-	buf_ = a_[i];
-	shift_down(a, a_, i);
+	buf = a[i];
+	while (i--)
+		a[i + 1] = a[i];
 	a[0] = buf;
-	a_[0] = buf_;
 }
 
-int	rrotate(t_stacks stacks, char print, char which)
+int	rrotate(int *a, int *b, char print, char which)
 {
 	if (which == 'a')
-		rrotating(stacks.a, stacks.a_);
+		rrotating(a);
 	else if (which == 'b')
-		rrotating(stacks.b, stacks.b_);
+		rrotating(b);
 	else if (which == 'r')
 	{
-		rrotating(stacks.a, stacks.a_);
-		rrotating(stacks.b, stacks.b_);
+		rrotating(a);
+		rrotating(b);
 	}
 	if (print == 'y')
 		ft_printf("rr%c\n", which);
