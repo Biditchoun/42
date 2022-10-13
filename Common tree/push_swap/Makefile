@@ -6,7 +6,7 @@
 #    By: swijnber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 05:21:22 by swijnber          #+#    #+#              #
-#    Updated: 2022/10/11 07:55:20 by swijnber         ###   ########.fr        #
+#    Updated: 2022/10/13 17:42:07 by swijnber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ clean:
 				make clean -C Libft
 
 fclean:			clean
-				rm -f ${NAME}
+				rm -f ${NAME} ${PNAME}
 				make fclean -C Libft
 
 re:				fclean

@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:44:09 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/11 08:41:30 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:18:52 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static t_brute	force_init(int *a, int *instructs, int argc)
 	rt.argc = argc;
 	return (rt);
 }
-/*static void	print_arr(int *arr)
+static void	print_arr(int *arr)
 {
 	int i = 0;
 	while (arr[i] != -1)
 		ft_printf("%i ", arr[i++]);
 	ft_printf("%i", arr[i]);
 	ft_printf("\n");
-}*/
+}
 static int	fill_instructs(int *instructs, int count)
 {
 	int	i;
@@ -84,6 +84,7 @@ static int	check_instructs(t_brute force, char print)
 		return ((int)ft_free((void *)a_, NULL) - 1);
 	b_[0] = a_[force.argc];
 	i = 0;
+	print_arr(force.instructs);
 	while (force.instructs[i] != -1)
 		give_instructs(a_, b_,  print, 1, force.base[force.instructs[i++]]);
 	i = -1;
@@ -97,7 +98,7 @@ static int	check_instructs(t_brute force, char print)
 
 int	brute_force(int *a_, int argc)
 {
-	int		instructs[100];
+	int		instructs[15];
 	int		count;
 	t_brute	force;
 	int		safe;
@@ -107,7 +108,7 @@ int	brute_force(int *a_, int argc)
 	if (!force.base)
 		return (-1);
 	count = 0;
-	while (count < 100)
+	while (count < 15)
 	{
 		count += fill_instructs(instructs, count);
 		safe = check_instructs(force, 'n');
@@ -116,7 +117,7 @@ int	brute_force(int *a_, int argc)
 		else if (safe)
 			break ;
 	}
-	if (count == 100)
+	if (count == 15)
 		return (INT_MAX);
 	check_instructs(force, 'y');
 	free(force.base);

@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:13:44 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/11 06:43:12 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:10:28 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	rrotating(int *a)
 	i = 0;
 	while (a[i] > 0)
 		i++;
-	buf = a[i];
+	buf = a[--i];
 	while (i--)
 		a[i + 1] = a[i];
 	a[0] = buf;

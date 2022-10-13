@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:14:45 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/11 07:53:56 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:15:13 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	main(int argc, char **argv)
 	int	*a_;
 	int	count;
 
-	ft_printf("Penser a tester check_order, shift down\n");
 	a = init_a(argc, argv);
 	if (!a)
 		return (error_rt(NULL, argc));

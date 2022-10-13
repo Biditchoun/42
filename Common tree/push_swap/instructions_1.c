@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:12:47 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/11 08:00:38 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:19:23 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	pushing(int *a, int *b)
 	while (b[i] > 0)
 		i++;
 	b[i + 1] = b[i];
-	while (--i - 1)
+	while (i--)
 		b[i + 1] = b[i];
 	b[0] = a[0];
 	while (a[++i] > 0)
