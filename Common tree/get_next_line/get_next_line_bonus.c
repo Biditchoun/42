@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/08 14:49:14 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/12 15:52:51 by swijnber         ###   ########.fr       */
+/*   Created: 2022/09/05 09:51:44 by swijnber          #+#    #+#             */
+/*   Updated: 2022/11/09 10:57:48 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static t_two	freeing_things(t_two fctrt)
+t_two	freeing_things(t_two fctrt)
 {
 	if (!fctrt.line)
 		free(fctrt.rt);
@@ -26,7 +26,7 @@ static t_two	freeing_things(t_two fctrt)
 	return (fctrt);
 }
 
-static t_two	read_next_line(int fd, char *line, char *buff)
+t_two	read_next_line(int fd, char *line, char *buff)
 {
 	int		i;
 	t_two	fctrt;
@@ -50,7 +50,7 @@ static t_two	read_next_line(int fd, char *line, char *buff)
 	return (fctrt);
 }
 
-static t_two	bsn_in_line(char *line, int i)
+t_two	bsn_in_line(char *line, int i)
 {
 	char	*buff;
 	t_two	fctrt;
@@ -67,27 +67,27 @@ static t_two	bsn_in_line(char *line, int i)
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
+	static char	*line[OPEN_MAX];
 	int			i;
 	char		*buff;
 	t_two		fctrt;
 
-	if (BUFFER_SIZE < 1 || read(fd, line, 0) < 0)
+	if (BUFFER_SIZE < 1 || read(fd, line[fd], 0) < 0)
 		return (NULL);
 	i = 0;
-	while (line && line[i] && line[i] != '\n')
+	while (line[fd] && line[fd][i] && line[fd][i] != '\n')
 		i++;
-	if (line && line[i] == '\n')
+	if (line[fd] && line[fd][i] == '\n')
 	{
-		fctrt = bsn_in_line(line, i);
-		line = fctrt.line;
+		fctrt = bsn_in_line(line[fd], i);
+		line[fd] = fctrt.line;
 		return (fctrt.rt);
 	}
 	buff = malloc(BUFFER_SIZE + 1);
 	if (!buff)
 		return (NULL);
 	buff[BUFFER_SIZE - 1] = 0;
-	fctrt = read_next_line(fd, line, buff);
-	line = fctrt.line;
+	fctrt = read_next_line(fd, line[fd], buff);
+	line[fd] = fctrt.line;
 	return (fctrt.rt);
 }
