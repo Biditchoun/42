@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 10:24:16 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/21 17:28:30 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:33:09 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,15 @@ static void	xeh_ftnirp(t_f lag, char *rt, char *nb, char type)
 	int	ox;
 
 	ox = 0;
-	if (lag.hash && nb[0] != '0')
+	if (lag.hash && nb[0] && nb[0] != '0')
 		ox = 2;
 	len = ft_strlen(nb);
 	i = 0;
 	if (!lag.minus && (lag.point || !lag.zero))
 		i += printfill(rt, ' ', lag.width - ft_max(lag.pwidth, len) - ox);
-	if (lag.hash && nb[0] != '0' && type == 'x')
+	if (lag.hash && nb[0] && nb[0] != '0' && type == 'x')
 		i += ft_strlcpy(&rt[i], "0x", 3);
-	else if (lag.hash && nb[0] != '0' && type == 'X')
+	else if (lag.hash && nb[0] && nb[0] != '0' && type == 'X')
 		i += ft_strlcpy(&rt[i], "0X", 3);
 	i += printfill(&rt[i], '0', lag.pwidth - len);
 	if (!lag.minus && !lag.point && lag.zero)

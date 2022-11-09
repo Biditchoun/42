@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:58:23 by swijnber          #+#    #+#             */
-/*   Updated: 2022/06/21 19:48:50 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:53:24 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ static char	*str_gen(t_f lag, char *arg)
 		s = ft_strdup(arg);
 	if (!s)
 		return (NULL);
-	if (!arg && lag.point && lag.pwidth < 6)
-		s[0] = 0;
-	else if (lag.point && lag.pwidth < (int)ft_strlen(s))
+	if (lag.point && lag.pwidth < (int)ft_strlen(s))
 		s[lag.pwidth] = 0;
 	return (s);
 }

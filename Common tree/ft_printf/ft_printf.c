@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:02:17 by swijnber          #+#    #+#             */
-/*   Updated: 2022/08/08 16:28:26 by swijnber         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:00:43 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,23 @@
 static char	*zero_address(const char *s, int lim)
 {
 	int		i;
+	int		slen;
 	char	*zero;
 
+	slen = ft_strlen(s);
 	i = 0;
-	while (i <= lim)
+	while (lim > -1)
 	{
-		zero = ft_strnrchr(s, '0', lim - i);
-		if (zero)
-		{
-			while (*(zero - i) == '0')
-				i++;
-			if (!ft_isdigit(*(zero - i)) && *(zero - i) != '.')
-				break ;
-		}
-		else
+		i = 0;
+		zero = ft_strnrchr(s, '0', lim);
+		if (!zero)
 			break ;
+		while (*(zero - i) == '0')
+			i++;
+		if (!ft_isdigit(*(zero - i)) && *(zero - i) != '.')
+			break ;
+		i += ft_strlen(zero) - slen + lim;
+		lim -= i;
 	}
 	return (zero);
 }

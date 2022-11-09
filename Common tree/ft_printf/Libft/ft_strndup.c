@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/09 10:29:43 by swijnber          #+#    #+#             */
-/*   Updated: 2022/11/09 11:28:31 by swijnber         ###   ########.fr       */
+/*   Created: 2022/11/09 12:09:22 by swijnber          #+#    #+#             */
+/*   Updated: 2022/11/09 12:10:37 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strndup(const char *s, int n)
 {
 	char	*c;
 	int		l;
 
 	if (!s)
 		return (NULL);
-	l = ft_strlen(s) + 1;
+	l = ft_min(ft_strlen(s) + 1, n);
 	c = malloc(l * sizeof (const char));
 	if (!c)
 		return (NULL);
