@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:11:53 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/11 08:41:33 by swijnber         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:32:27 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,29 @@ int	give_instructs(int *a, int *b, int print, ...)
 	return (count);
 }
 
-int	algorithms_hq(int *a_, int argc)
+/*static void	print_arr(int *arr)
 {
-	int			(*f)(int *, int, char);
-	int			count[2];
+	int i = 0;
+	while (i < 10)
+		ft_printf("%i ", arr[i++]);
+	ft_printf("%i", arr[i]);
+	ft_printf("\n");
+}*/
 
-	count[0] = brute_force(a_, argc);
-	if (count[0] == -1)
+int	algorithms_hq(int *a_, int argc, int bft)
+{
+	int	(*f)(int *, int, char);
+	int	count;
+
+	count = brute_force(a_, argc, bft);
+	if (count == -1)
 		return ((int)ft_free((void *)a_, NULL) - 1);
-	if (count[0] != INT_MAX)
-		return ((int)ft_free((void *)a_, NULL) + count[0]);
-	count[0] = algo_1(a_, argc, 'n');
+	if (count != INT_MAX)
+		return ((int)ft_free((void *)a_, NULL) + count);
+	count = algo_1(a_, argc, 'n');
 	f = &algo_1;
 	f(a_, argc, 'y');
-	ft_printf("%i\n", count[0]);
+	ft_printf("%i\n", count);
 	free(a_);
-	return (count[0]);
+	return (count);
 }

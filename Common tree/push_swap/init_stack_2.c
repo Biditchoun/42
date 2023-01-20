@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:12:29 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/11 07:48:38 by swijnber         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:31:23 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,23 @@ static int	*case_int_max(int *a, int *a_, int argc)
 	return (buf);
 }
 
-int	*init_a_(int *a, int argc)
+int	*init_a_(int *a, int argc, int bf)
 {
 	int	*a_;
 	int	*buf;
 	int	i;
 	int	count;
 
-	a_ = malloc(sizeof(int) * argc);
+	a_ = malloc(sizeof(int) * (argc - bf));
 	if (!a_)
 		return (NULL);
-	buf = case_int_max(a, a_, --argc);
+	buf = case_int_max(a, a_, --argc - bf);
 	if (!buf)
 		return (ft_free((void *)a_, NULL));
 	count = 1;
-	while (count - 1 < argc)
+	while (count - 1 < argc - bf)
 	{
-		i = min_in_stack(buf, argc);
+		i = min_in_stack(buf, argc - bf);
 		if (i == INT_MAX)
 			break ;
 		a_[i] = count++;
@@ -81,16 +81,16 @@ int	*init_a_(int *a, int argc)
 	return (a_);
 }
 
-int	*init_b_(int *a_, int argc)
+int	*init_b_(int *a_, int argc, int bf)
 {
 	int	i;
 	int	*b_;
 
-	b_ = malloc(sizeof(int) * argc);
+	b_ = malloc(sizeof(int) * (argc - bf));
 	if (!b_)
 		return (NULL);
 	i = 0;
-	while (i < argc)
-		b_[i++] = a_[argc - 1];
+	while (i < argc - bf)
+		b_[i++] = a_[argc - 1 - bf];
 	return (b_);
 }

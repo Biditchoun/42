@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:14:45 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/11 14:15:13 by swijnber         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:31:58 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,46 @@ static int	check_order(int *a, int argc)
 	return (1);
 }
 
+static int	bf_indicated(char **argv)
+{
+	int	bft;
+
+	bft = 0;
+	if (!ft_strncmp(argv[1], "Bruteforce=", 11)
+		|| !ft_strncmp(argv[1], "bruteforce=", 11))
+		bft++;
+	return (bft);
+}
+
+static int	bf_tries(char **argv)
+{
+	int	bft;
+
+	bft = 0;
+	if (!ft_strncmp(argv[1], "Bruteforce=", 11)
+		|| !ft_strncmp(argv[1], "bruteforce=", 11))
+		bft = ft_atoi(&argv[1][11]);
+	if (bft > 0)
+		return (bft);
+	return (12);
+}
+
 int	main(int argc, char **argv)
 {
 	int	*a;
 	int	*a_;
 	int	count;
 
-	a = init_a(argc, argv);
+	a = init_a(argc, argv, bf_indicated(argv));
 	if (!a)
 		return (error_rt(NULL, argc));
-	a_ = init_a_(a, argc);
+	a_ = init_a_(a, argc, bf_indicated(argv));
 	if (!a_)
 		return (error_rt(a, argc));
 	free(a);
 	if (check_order(a_, argc))
 		return ((int)ft_free((void *)a_, NULL));
-	count = algorithms_hq(a_, argc);
+	count = algorithms_hq(a_, argc - bf_indicated(argv), bf_tries(argv));
 	if (count < 0)
 		return (error_rt(a_, argc));
 	return (count);

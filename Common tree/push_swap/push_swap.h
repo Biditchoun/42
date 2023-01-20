@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:15:08 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/11 08:15:48 by swijnber         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:45:29 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ typedef struct s_tacks
 }	t_brute;
 
 int	main(int argc, char **argv);
-int	*init_a(int argc, char **argv);
-int	*init_a_(int *a, int argc);
-int	*init_b_(int *a_, int argc);
+int	*init_a(int argc, char **argv, int bf);
+int	*init_a_(int *a, int argc, int bf);
+int	*init_b_(int *a_, int argc, int bf);
 
 int	give_instructs(int *a, int *b, int print, ...);
 int	swap(int *a, int *b, char print, char which);
@@ -35,8 +35,8 @@ int	rotate(int *a, int *b, char print, char which);
 int	rrotate(int *a, int *b, char print, char which);
 int	shift_up(int *a);
 
-int	algorithms_hq(int *a_, int argc);
-int	brute_force(int *a_, int argc);
+int	algorithms_hq(int *a_, int argc, int bft);
+int	brute_force(int *a_, int argc, int bft);
 int	instructs_check(int *instructs);
 int	push_validity_check(int *instructs, int p, int i);
 int	algo_1(int *a, int argc, char print);

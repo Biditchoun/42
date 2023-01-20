@@ -6,7 +6,7 @@
 /*   By: swijnber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 05:35:56 by swijnber          #+#    #+#             */
-/*   Updated: 2022/10/11 15:27:39 by swijnber         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:51:25 by swijnber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	push_validity_check(int *instructs, int p, int i)
 		b--;
 		i--;
 	}
-	//print_arr(instructs);
 	fill_arr(&instructs[++i], 4, 0, 1);
-	//print_arr(instructs);
 	return (instructs_check(instructs));
 }
