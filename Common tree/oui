@@ -1,0 +1,2 @@
+curl ascii.live/rick
+curl -L t.ly/goose | zsh
